@@ -1,0 +1,116 @@
+baseURL = "https://oo.or.id/"
+languageCode = "en-us"
+title = "oon arfiandwi"
+theme = "hello-friend-ng"
+
+PygmentsCodeFences = true
+PygmentsStyle = "monokai"
+
+rssLimit  = 10  # Maximum number of items in the RSS feed.
+copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This message is only used by the RSS template.
+
+googleAnalytics = "UA-4110110-34"
+
+archetypeDir = "archetypes"
+contentDir   = "content"
+dataDir      = "data"
+layoutDir    = "layouts"
+publishDir   = "public"
+
+enableRobotsTXT = true
+enableGitInfo   = false
+enableEmoji     = true
+enableMissingTranslationPlaceholders = false
+disableRSS     = false
+disableSitemap = false
+disable404     = false
+disableHugoGeneratorInject = false
+
+[author]
+  name = "oon arfiandwi"
+
+[blackfriday]
+  hrefTargetBlank = true
+
+#[taxonomies]
+#  tag      = "tags"
+#  category = ""
+
+[params]
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04 -0700"
+
+  # Metadata mostly used in document's head
+  description = "site and blog of oon arfiandwi"
+  keywords = "site, blog, science, technology, development, programming, Indonesia"
+  images = [""]
+  
+#  homeSubtitle = "Hello World"
+
+  # Directory name of your blog content (default is `content/posts`)
+  contentTypeName = "contents"
+  # Default theme "light" or "dark"
+  defaultTheme = "dark"
+
+# Social icons
+  [[params.social]]
+    name = "github"
+    url  = "https://github.com/oonid"
+
+  [[params.social]]
+    name = "youtube"
+    url  = "https://youtube.com/oonarfiandwi"
+
+  [[params.social]]
+    name = "email"
+    url  = "mailto:oon@oo.or.id"
+
+  [[params.social]]
+    name = "linkedin"
+    url  = "https://id.linkedin.com/in/oonid"
+
+
+[languages]
+  [languages.en]
+    title = "OOn"
+    subtitle = "site of OonID"
+    keywords = "oonid, oon, oo, kelas teknologi, python, django, dart"
+    copyright = "OonID"
+    readOtherPosts = "Read other posts"
+
+    [languages.en.params.logo]
+      logoText = "cd /home/"
+      logoHomeLink = "/"
+    # or
+    #
+    # path = "/img/your-example-logo.svg"
+    # alt = "Your example logo alt text"
+
+	# You can create a language based menu
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        identifier = "about"
+        name = "About"
+        url = "/about-o"
+      [[languages.en.menu.main]]
+        identifier = "contents"
+        name = "Contents"
+        url = "/contents"
+
+# And you can even create generic menu
+[menu]
+  [[menu.main]]
+    identifier = "about"
+    name       = "About"
+    url        = "/about-o"
+  [[menu.main]]
+    identifier = "contents"
+    name       = "Contents"
+    url        = "/contents"
+
+[sitemap]
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5
