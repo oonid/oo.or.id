@@ -5,6 +5,7 @@ publishDate: 2018-12-01T23:46:00+08:00
 image: "/images/2018/pytorchudacityscholar.png"
 url: "/content/pengenalan-neural-networks"
 tags: ["Udacity", "Machine Learning"]
+math: true
 draft: false
 ---
 
@@ -44,25 +45,25 @@ Dengan melakukan **prediksi** jika suatu nilai dimasukkan dalam persamaan terseb
 
 Secara lebih umum, persamaan tersebut dapat dituliskan sebagai berikut:
 
-> w~1~x~1~ + w~2~x~2~ + b = 0
+> $w\_1x\_1 + w\_2x\_2 + b = 0$
 
 Atau dalam notasi vector dapat dituliskan sebagai:
 
-> Wx + b = 0
->
-> W = (w~1~, w~2~)
->
-> x = (x~1~, x~2~)
+> $Wx + b = 0$
+
+> $W = (w\_1, w\_2)$
+
+> $x = (x\_1, x\_2)$
 
 Dengan referensi **x** sebagai _input_, **W** sebagai _weight_, dan **b** sebagai _bias_.
 
-Untuk titik (orang) **x~1~, x~2~** akan diprediksi _label_ sebagai **y**, dituliskan sebagai **y = label: 0 or 1**. Dimana jika diterima di kampus maka **label = 1** dan jika ditolak maka **label = 0**.
+Untuk titik (orang) $x\_1, x\_2$ akan diprediksi _label_ sebagai $y$, dituliskan sebagai **y = label: 0 or 1**. Dimana jika diterima di kampus maka **label = 1** dan jika ditolak maka **label = 0**.
 
 Prediksi tersebut dituliskan sebagai $\hat{y}$ (_y hat_).
 
-> $\hat{y}$ = 1 if Wx + b >= 0
->
-> $\hat{y}$ = 0 if Wx + b < 0
+> $\hat{y}$ = 1 if $Wx + b >= 0$
+
+> $\hat{y}$ = 0 if $Wx + b < 0$
 
 {{< figure src="/images/2018/nn003.webp" title="Model secara umum untuk Klasifikasi 2 objek" alt="Model secara umum untuk Klasifikasi 2 objek" position="center" >}}
 
@@ -80,7 +81,7 @@ Perceptron adalah komponen pembangun (_building block_) dalam Neural Networks.
 
 Dalam persamaan linear sebelumnya, dalam contoh kasus klasifikasi penentuan masuk (seleksi) kampus.
 
-> 2x~1~ + x~2~ - 18 = 0
+> $2x\_1 + x\_2 - 18 = 0$
 
 Artinya suatu **score** ditentukan dengan **2 * Test + Grades - 18**.
 
@@ -92,7 +93,7 @@ Dalam gagasan tentang **Perceptron**, notasi perceptron dapat digambarkan sebaga
 
 {{< figure src="/images/2018/nn005.webp" title="Notasi Perceptron untuk Klasifikasi Seleksi Kampus" alt="Notasi Perceptron untuk Klasifikasi Seleksi Kampus" position="center" >}}
 
-Secara lengkap, notikasi persamaan linear dalam klasifikasi seleksi kampus di atas, digambarkan sebagai berikut. Dimana angka **2** (dari Test) dan angka **1** (dari Grades) akan menjadi label masing-masing untuk nilai dari **x~1~** dan **x~2~**, lihat pada dua panah di sebelah kiri. Sedangkan angka **-18** (dari bias) akan menjadi label untuk node yang di tengah.
+Secara lengkap, notikasi persamaan linear dalam klasifikasi seleksi kampus di atas, digambarkan sebagai berikut. Dimana angka **2** (dari Test) dan angka **1** (dari Grades) akan menjadi label masing-masing untuk nilai dari $x\_1$ dan $x\_2$, lihat pada dua panah di sebelah kiri. Sedangkan angka **-18** (dari bias) akan menjadi label untuk node yang di tengah.
 
 {{< figure src="/images/2018/nn006.webp" title="Notasi Perceptron jenis 1" alt="Notasi Perceptron jenis 1" position="center" >}}
 
@@ -104,7 +105,7 @@ Sehingga lengkap dengan proses prediksi, akan membandingkan hasil kalkulasinya a
 
 {{< figure src="/images/2018/nn008.webp" title="Notasi Perceptron jenis 2 untuk Klasifikasi Seleksi Kampus" alt="Notasi Perceptron jenis 2 untuk Klasifikasi Seleksi Kampus" position="center" >}}
 
-Dalam kondisi secara umum, maka digambarkan bahwa ada **n input**, dengan nilai **x~1~, x~2~, ... x~n~** dan setiap nilai itu punya bobot **w~1~, w~2~, ... w~n~** serta satu nilai bias **b**. 
+Dalam kondisi secara umum, maka digambarkan bahwa ada **n input**, dengan nilai $x\_1, x\_2, ... x\_n$ dan setiap nilai itu punya bobot $w\_1, w\_2, ... w\_n$ serta satu nilai bias **b**.
 
 {{< figure src="/images/2018/nn009.webp" title="Notasi Perceptron untuk n input, n weight, 1 bias" alt="Notasi Perceptron untuk n input, n weight, 1 bias" position="center" >}}
 
