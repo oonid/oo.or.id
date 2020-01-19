@@ -8,7 +8,7 @@ tags: ["Google"]
 draft: false
 ---
 
-{{< figure src="/images/2015/oon_at_google_io_2015.jpg" title="Google I/O 2015" >}}
+{{< figure src="/images/2015/oon_at_google_io_2015.jpg" title="Google I/O 2015" alt="Google I/O 2015" position="center">}}
 
 Here I am, at Google I/O 2015.
 
