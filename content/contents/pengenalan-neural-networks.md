@@ -337,6 +337,72 @@ Dengan catatan:
 
 Karena pembahasannya panjang, hanya terkait untuk kode ini, maka dibuatkan halaman khusus [Membuat Kode Algoritma Perceptron](/content/membuat-kode-algoritma-perceptron), karena ada jawaban dari quiz sehingga pertimbangkan dalam membuka halaman tsb.
 
+### Algoritma Perceptron yang Non-Linear
+
+Setelah sebelumnya membahas perceptron yang memisahkan dua kelompok data dengan sebuah garis (persamaan linear), ke depan akan lebih kompleks dengan pemisahan dua kelompok data dengan persamaan yang tidak lagi linear, misalnya kuadratik, atau persamaan lingkaran, dls.
+
+Sebelum mulai membahas ke persamaan yang lebih kompleks, kita akan membahas beberapa hal pendukungnya terlebih dahulu.
+
+### Fungsi Error
+
+Fungsi error adalah sebuah fungsi yang akan menginformasikan sejauh apa nilai (kesalahan, error) dari prediksi yang kita lakukan, biasanya dibanding dengan label atau data latih. Di kelas Udacity, fungsi error (_error function_) didefinisikan sebagai sebuah fungsi yang memberikan informasi sejauh apa kita dari solusi.
+
+Fungsi error ini selanjutnya akan membantu kita dalam proses mencari solusi dari permasalahan (implementasi Neural Networks).
+
+{{< figure src="/images/2018/nn023.webp" title="Fungsi Error menuruni Gunung Errorest" alt="Fungsi Error menuruni Gunung Errorest" position="center" >}}
+
+Fungsi error tidak boleh bernilai bilangan bulat (_discrete_), tetapi harus bernilai pecahan (_continuous_). Dengan langkah (_steps_) yang kecil, maka akan sulit mencari apakah fungsi error sudah mulai mengecil atau belum. Misalnya:
+
+> untuk langkah kecil 0.2, maka nilai 1 ditambah/dikurangi 0.2, dalam bilangan bulat, masih bernilai 1.
+
+Fungsi error harus bisa diturunkan secara matematika (_differentiable_), akan dibahas lebih lanjut nanti.
+
+Lalu bagaimana gagasan fungsi error ini bisa digunakan untuk memecahkan masalah sebelumnya, mencari sebuah garis yang dapat memisahkan dua kelompok data?
+
+Caranya dilakukan dalam dua langkah:
+
+1. Memberikan nilai **penalty** dari setiap titik, dimana nilai penalty akan besar apabila titik (salah klasifikasi sehingga) berada area yang salah, serta nilai penalty bernilai kecil (hampir mendekati 0) apabila titik sudah sesuai (klasifikasi) berada di areanya.
+2. Menjumlahkan nilai **penalty** dari semua titik, kemudian mencari persamaan garis (misalnya dengan menggeser-gesernya), hingga dapat mengurangi total nilai error (hasil penjumlahan nilai penalty). Tampak pada gambar berikut bahwa ada 2 titik yang ukurannya besar, menggambarkan bahwa kedua titik tersebut masih salah dalam klasifikasi.
+
+{{< figure src="/images/2018/nn024.webp" title="Fungsi Error dengan menjumlahkan nilai penalty" alt="Fungsi Error dengan menjumlahkan nilai penalty" position="center" >}}
+
+Dengan menggeser-geserkan garis untuk memisahkan dua kelompok data, dengan cara mencari total nilai error yang paling kecil, akhirnya didapatkan gambaran sebagai berikut.
+
+{{< figure src="/images/2018/nn025.webp" title="Fungsi Error dengan total nilai penalty kecil" alt="Fungsi Error dengan total nilai penalty kecil" position="center" >}}
+
+Selanjutnya, bagaimana mendefinisikan fungsi error ini, kemudian bagaimana penggunaannya dalam metode _gradient descent_? akan dijelaskan berikutnya.
+
+### Fungsi Sigmoid untuk Fungsi Aktivasi
+
+Jika fungsi error dipilih untuk menggunakan nilai pecahan (_continuous_), maka demikian juga dengan nilai prediksi dapat dipilih untuk menggunakan nilai pecahan (_continuous_) juga. Di prediksi _discrete_ kita menggunakan label **ya** atau **tidak**, **diterima** atau **ditolak**, dls. Di prediksi _continuous_, kita menggunakan prosentase kemungkinan (_probabilty_), misalnya **80% kemungkinan diterima**, dls.
+
+{{< figure src="/images/2018/nn026.webp" title="Prediksi discrete dan prediksi continuous" alt="Prediksi discrete dan prediksi continuous" position="center" >}}
+
+Dalam contoh di atas, sebelumnya prediksi antara diterima di kampus atau ditolak, diubah menjadi prediksi _continues_ berarti menjadi berapa prosentase kemungkinan diterima. Dalam gambar berikut jika biru adalah diterima maka titik biru 0.85 artinya 85% kemungkinan diterima, sedangkan titik merah 0.2 artinya 20% kemungkinan diterima.
+
+{{< figure src="/images/2018/nn027.webp" title="Prediksi discrete dan prediksi continuous penerimaan di kampus" alt="Prediksi discrete dan prediksi continuous penerimaan di kampus" position="center" >}}
+
+Pengubahan prediksi yang sebelumnya _discrete_ menggunakan _step function_, menjadi prediksi _continuos_ menggunakan **sigmoid function** sebagai **fungsi aktivasi** (_activation function_). Fungsi _sigmoid_ ini akan mengubah nilai masukan positif yang besar menghasilkan nilai **mendekati 1**, nilai masukan negatif yang besar menghasilkan nilai **mendekati 0**, dan nilai masukan mendekati 0 akan menghasilkan nilai **mendekati 0.5**.
+
+{{< figure src="/images/2018/nn028.webp" title="Step function dan Sigmoid function" alt="Step function dan Sigmoid function" position="center" >}}
+
+Persamaan dari fungsi _sigmoid_ ini adalah:
+
+| $\sigma(x) = \frac{1}{1 + e^-x}$
+
+Berikut adalah gambaran saat persamaan $Wx + b$ dimasukkan pada fungsi _sigmoid_.
+
+* Saat nilai dari $Wx + b$ positif yang besar, keluaran dari fungsi _sigmoid_ adalah mendekati 1
+* Saat nilai dari $Wx + b$ negatif yang besar, keluaran dari fungsi _sigmoid_ adalah mendekati 0
+* Dan di garis utamanya, dimana $Wx + b$ bernilai 0, keluaran dari fungsi sigmoid adalah 0.5
+
+{{< figure src="/images/2018/nn029.webp" title="Fungsi sigmoid untuk Wx + b" alt="Fungsi sigmoid untuk Wx + b" position="center" >}}
+
+Setelah memahami fungsi _sigmoid_ sebagai fungsi aktivasi (_activation function_), saatnya menerapkannya ke Perceptron, sehingga keluarannya berada pada nilai _continues_ antara 0 dengan 1.
+
+{{< figure src="/images/2018/nn030.webp" title="Perceptron dengan Sigmoid sebagai fungsi aktivasi" alt="Perceptron dengan Sigmoid sebagai fungsi aktivasi" position="center" >}}
+
+
 
 
 
