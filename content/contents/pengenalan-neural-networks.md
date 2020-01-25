@@ -5,6 +5,7 @@ publishDate: 2018-12-01T23:46:00+08:00
 image: "/images/2018/pytorchudacityscholar.png"
 url: "/content/pengenalan-neural-networks"
 tags: ["Udacity", "Machine Learning"]
+aliases: ["/intronn"]
 math: true
 draft: false
 ---
@@ -337,6 +338,234 @@ Dengan catatan:
 
 Karena pembahasannya panjang, hanya terkait untuk kode ini, maka dibuatkan halaman khusus [Membuat Kode Algoritma Perceptron](/content/membuat-kode-algoritma-perceptron), karena ada jawaban dari quiz sehingga pertimbangkan dalam membuka halaman tsb.
 
+### Algoritma Perceptron yang Non-Linear
+
+Setelah sebelumnya membahas perceptron yang memisahkan dua kelompok data dengan sebuah garis (persamaan linear), ke depan akan lebih kompleks dengan pemisahan dua kelompok data dengan persamaan yang tidak lagi linear, misalnya kuadratik, atau persamaan lingkaran, dls.
+
+Sebelum mulai membahas ke persamaan yang lebih kompleks, kita akan membahas beberapa hal pendukungnya terlebih dahulu.
+
+### Fungsi Error
+
+Fungsi error adalah sebuah fungsi yang akan menginformasikan sejauh apa nilai (kesalahan, error) dari prediksi yang kita lakukan, biasanya dibanding dengan label atau data latih. Di kelas Udacity, fungsi error (_error function_) didefinisikan sebagai sebuah fungsi yang memberikan informasi sejauh apa kita dari solusi.
+
+Fungsi error ini selanjutnya akan membantu kita dalam proses mencari solusi dari permasalahan (implementasi Neural Networks).
+
+{{< figure src="/images/2018/nn023.webp" title="Fungsi Error menuruni Gunung Errorest" alt="Fungsi Error menuruni Gunung Errorest" position="center" >}}
+
+Fungsi error tidak boleh bernilai bilangan bulat (_discrete_), tetapi harus bernilai pecahan (_continuous_). Dengan langkah (_steps_) yang kecil, maka akan sulit mencari apakah fungsi error sudah mulai mengecil atau belum. Misalnya:
+
+> untuk langkah kecil 0.2, maka nilai 1 ditambah/dikurangi 0.2, dalam bilangan bulat, masih bernilai 1.
+
+Fungsi error harus bisa diturunkan secara matematika (_differentiable_), akan dibahas lebih lanjut nanti.
+
+Lalu bagaimana gagasan fungsi error ini bisa digunakan untuk memecahkan masalah sebelumnya, mencari sebuah garis yang dapat memisahkan dua kelompok data?
+
+Caranya dilakukan dalam dua langkah:
+
+1. Memberikan nilai **penalty** dari setiap titik, dimana nilai penalty akan besar apabila titik (salah klasifikasi sehingga) berada area yang salah, serta nilai penalty bernilai kecil (hampir mendekati 0) apabila titik sudah sesuai (klasifikasi) berada di areanya.
+2. Menjumlahkan nilai **penalty** dari semua titik, kemudian mencari persamaan garis (misalnya dengan menggeser-gesernya), hingga dapat mengurangi total nilai error (hasil penjumlahan nilai penalty). Tampak pada gambar berikut bahwa ada 2 titik yang ukurannya besar, menggambarkan bahwa kedua titik tersebut masih salah dalam klasifikasi.
+
+{{< figure src="/images/2018/nn024.webp" title="Fungsi Error dengan menjumlahkan nilai penalty" alt="Fungsi Error dengan menjumlahkan nilai penalty" position="center" >}}
+
+Dengan menggeser-geserkan garis untuk memisahkan dua kelompok data, dengan cara mencari total nilai error yang paling kecil, akhirnya didapatkan gambaran sebagai berikut.
+
+{{< figure src="/images/2018/nn025.webp" title="Fungsi Error dengan total nilai penalty kecil" alt="Fungsi Error dengan total nilai penalty kecil" position="center" >}}
+
+Selanjutnya, bagaimana mendefinisikan fungsi error ini, kemudian bagaimana penggunaannya dalam metode _gradient descent_? akan dijelaskan berikutnya.
+
+### Fungsi Sigmoid untuk Fungsi Aktivasi
+
+Jika fungsi error dipilih untuk menggunakan nilai pecahan (_continuous_), maka demikian juga dengan nilai prediksi dapat dipilih untuk menggunakan nilai pecahan (_continuous_) juga. Di prediksi _discrete_ kita menggunakan label **ya** atau **tidak**, **diterima** atau **ditolak**, dls. Di prediksi _continuous_, kita menggunakan prosentase kemungkinan (_probabilty_), misalnya **80% kemungkinan diterima**, dls.
+
+{{< figure src="/images/2018/nn026.webp" title="Prediksi discrete dan prediksi continuous" alt="Prediksi discrete dan prediksi continuous" position="center" >}}
+
+Dalam contoh di atas, sebelumnya prediksi antara diterima di kampus atau ditolak, diubah menjadi prediksi _continues_ berarti menjadi berapa prosentase kemungkinan diterima. Dalam gambar berikut jika biru adalah diterima maka titik biru 0.85 artinya 85% kemungkinan diterima, sedangkan titik merah 0.2 artinya 20% kemungkinan diterima.
+
+{{< figure src="/images/2018/nn027.webp" title="Prediksi discrete dan prediksi continuous penerimaan di kampus" alt="Prediksi discrete dan prediksi continuous penerimaan di kampus" position="center" >}}
+
+Pengubahan prediksi yang sebelumnya _discrete_ menggunakan _step function_, menjadi prediksi _continuos_ menggunakan **sigmoid function** sebagai **fungsi aktivasi** (_activation function_). Fungsi _sigmoid_ ini akan mengubah nilai masukan positif yang besar menghasilkan nilai **mendekati 1**, nilai masukan negatif yang besar menghasilkan nilai **mendekati 0**, dan nilai masukan mendekati 0 akan menghasilkan nilai **mendekati 0.5**.
+
+{{< figure src="/images/2018/nn028.webp" title="Step function dan Sigmoid function" alt="Step function dan Sigmoid function" position="center" >}}
+
+Persamaan dari fungsi _sigmoid_ ini adalah:
+
+| $\sigma(x) = \frac{1}{1 + e^-x}$
+
+Berikut adalah gambaran saat persamaan $Wx + b$ dimasukkan pada fungsi _sigmoid_.
+
+* Saat nilai dari $Wx + b$ positif yang besar, keluaran dari fungsi _sigmoid_ adalah mendekati 1
+* Saat nilai dari $Wx + b$ negatif yang besar, keluaran dari fungsi _sigmoid_ adalah mendekati 0
+* Dan di garis utamanya, dimana $Wx + b$ bernilai 0, keluaran dari fungsi sigmoid adalah 0.5
+
+{{< figure src="/images/2018/nn029.webp" title="Fungsi sigmoid untuk Wx + b" alt="Fungsi sigmoid untuk Wx + b" position="center" >}}
+
+Setelah memahami fungsi _sigmoid_ sebagai fungsi aktivasi (_activation function_), saatnya menerapkannya ke Perceptron, sehingga keluarannya berada pada nilai _continues_ antara 0 dengan 1.
+
+{{< figure src="/images/2018/nn030.webp" title="Perceptron dengan Sigmoid sebagai fungsi aktivasi" alt="Perceptron dengan Sigmoid sebagai fungsi aktivasi" position="center" >}}
+
+### Klasifikasi Multi-class
+
+Jika sebelumnya jika hanya membahas klasifikasi dua _class_ (_binary classification_), misalnya diterima atau ditolak masuk kampus. Berikut akan kita bahas klasifikasi lebih dari dua _class_, misalnya menentukan apakah binatang bebek (_duck_), berang-berang (beaver), atau anjing laut (_walrus_).
+
+{{< figure src="/images/2018/nn031.webp" title="Klasifikasi 3 class dengan fungsi Softmax" alt="Klasifikasi 3 class dengan fungsi Softmax" position="center" >}}
+
+### Fungsi Softmax
+
+Untuk dapat melakukan prediksi dengan nilai _continues_ seperti halnya fungsi _Sigmoid_, untuk klasifikasi 3 _class_ atau lebih, menggunakan fungsi **Softmax**. _Probability_ dari class $i$, dengan _score_ dari fungsi linear bernilai $z\_1, ..., z\_n$.
+
+> $P(i) = \frac{e^z\_i}{e^z\_1 + ... + e^z\_n}$
+
+Fungsi _eksponential_ atau $e$ adalah sebuah fungsi yang selalu memberikan nilai positif untuk semua masukan, baik itu masukannya positif ataupun negatif, besar ataupun kecil.
+
+_Pseudocode_ fungsi Softmax menggunakan NumPy (`import numpy as np`):
+
+* `np.exp()` seperti yang sudah diprediksi ini adalah fungsi untuk _exponential_, tapi fungsi ini menerima input bukan hanya skalar, bahkan juga bisa sebuah NumPy array. Jadi fungsi _exponential_-nya di-_broadcast_ ke seluruh element array, masing-masing dilakukan operasi exponential. Di bawah ini fungsi `np.array()` akan membentuk NumPy array dari sebuah List Python.
+
+  ```python
+  print(np.exp(np.array([2, 1, 0])))  # [7.3890561  2.71828183 1.        ]
+  ```
+
+* `np.sum` juga sesuai dengan namanya akan melakukan _summation_ atau penambahan, termasuk fungsi yang menerima input berupa NumPy array, jadi seluruh elemennya akan dijumlahkan. Sebagai contoh, jika NumPy array hasil yang dicetak di atas dijumlahkan, hasilnya adalah:
+
+  ```python
+  print(np.sum(np.exp(np.array([2, 1, 0]))))  # 11.107337927389695
+  ```
+
+* Untuk membagi, kita bisa menggunakan operator pembagi biasa ( `/`), atau menggunakan fungsi `np.divide()`, yang bisa melakukan operasi _broadcast_ untuk membagi suatu NumPy array dengan suatu skalar, jadi seluruh elemennya akan dibagi dengan skalar tersebut.
+
+Tinggal menggabungkan tiga fungsi tersebut, untuk membuat fungsi Softmax menggunakan NumPy.
+
+
+Yang seru, pertanyaan di salah satu materi video, apakah Softmax untuk `n = 2` bernilai sama dengan Sigmoid? Untuk kasus khusus dimana `n = 2`, fungsi Softmax sama dengan fungsi Sigmoid (atau di beberapa referensi disebut fungsi Logistic). Salah satu yang menjelaskan penurunan rumusnya di situs <u>deeplearning stanford</u> [^4], di situ diberikan sebutan bahwa _Softmax regression_ itu adalah **multinomial Logistic regression**, sehingga dalam kasus _binary_ akan sama dengan _Logistic regression_ atau Sigmoid. Nanti akan dibahas selanjutnya mengenai _Logistic regression_.
+
+### One-Hot Encoding
+
+Pada contoh kasus yang digunakan sebelumnya, datanya tersedia dalam bentuk angka, misalnya hasil ujian. Tapi kadang data masukan yang dimiliki tidak berbentuk angka, misalnya berbentuk kategori, untuk itu digunakan proses **One-Hot Encoding** yang akan mendefinisikan setiap jenis kategori sebagai satu kolom data, kemudian nilainya hanya 1 atau 0 sesuai dengan kategorinya.
+
+{{< figure src="/images/2018/nn032.webp" title="One-Hot Encoding duck, beaver, walrus" alt="One-Hot Encoding duck, beaver, walrus" position="center" >}}
+
+Pada gambar di atas, adalah One-Hot Encoding untuk 3 _class_: duck, beaver, walrus. Salah satu yang penting di sini adalah tidak ada ketergantungan antara masing-masing class, sehingga tidak menggunakan nilai urut, misalnya duck 0, beaver 1, walrus 2.
+
+### _Maximum Likelihood_
+
+Masih membahas seputar pemilihan model yang memisahkan dua kelompok data sebelumnya. Mana _model_ yang paling baik dalam memisahkan dua kelompok data?
+
+Dalam membahas tentang statistik, probabilitas misalnya dari dua buah _model_, mana yang lebih akurat? _Model_ yang terbaik adalah _model_ yang memberikan probabilitas paling besar untuk seluruh _label_ (data latih) yang ada di kedua kelompok tersebut. Hal ini disebut dengan **maximum likelihood**.
+
+> Metode _maximum likelihood_ dengan memilih model yang memberikan nilai probabilitas tertinggi untuk _label_ yang ada. Demikian sehingga memaksimalkan probabilitas, kita bisa memilih model terbaik.
+
+Kembali membahas prediksi dari setiap titik dari kedua kelompok adalah $\hat{y} = \sigma(Wx + b)$ sehingga probabilitas dari sebuah titik adalah biru (_blue_) ditentukan dengan:
+
+> $P(blue) = \sigma(Wx + b)$
+
+Sehingga probabilitas dari seluruh data dari kedua kelompok adalah `dot product` dari setiap probabilitas titik yang ada, atau dengan kata lain, perkalian dari semua probabilitas titik yang ada.
+
+{{< figure src="/images/2018/nn033.webp" title="Maximum Likelihood sebagai pencarian probabilitas terbesar dari suatu model" alt="Maximum Likelihood sebagai pencarian probabilitas terbesar dari suatu model" position="center" >}}
+
+Apakah memaksimalkan probabilitas dari suatu model sama artinya dengan meminimalkan fungsi error? Kita akan lihat dalam pembahasan berikut.
+
+Kembali membahas sebelumnya yang menghitung probabilitas dari seluruh data dengan melakukan perkalian (_product_) dari setiap probabilitas titik. Sayangnya perkalian (misalnya untuk ribuan data) adalah proses yang membutuhkan sumber daya (_resource_) besar dimana keseluruhan datanya adalah pecahan (antara 0 dan 1), hasilnya akan pecahan yang sangat kecil, untuk itu dibutuhkan operator lain yang lebih hemat sumber daya.
+
+Fungsi $log$ akan mengubah perkalian (_products_) menjadi penjumlahan (_sum_). Berikut adalah sifat dari logaritma (basis bilangan 10) yang digunakan:
+
+> $log(A * B) = log(A) + log(B)$
+
+Dengan menggunakan basis bilangan $e$, operator logartima yang digunakan adalah logaritma natural $ln()$.
+
+> $ln(A * B) = ln(A) + ln(B)$
+
+{{< figure src="/images/2018/Logarithm_plots.png" title="Plot Logaritma" alt="Plot Logaritma" position="center" >}}
+
+Plot Logaritma tersebut dari artikel wiki [^5]. Perhatikan bahwa untuk nilai **pecahan antara 0 dan 1**, hasil dari logaritmanya adalah **negatif**.
+
+### Cross Entropy
+
+_Cross Entropy_ adalah sebuah konsep yang menjumlahkan nilai negatif dari logaritma propabilitas untuk setiap data. 
+
+{{< figure src="/images/2018/nn034.webp" title="Cross Entropy sebagai penjumlahan nilai negatif dari logaritma probabilitas" alt="Cross Entropy sebagai penjumlahan nilai negatif dari logaritma probabilitas" position="center" >}}
+
+**Model yang baik** akan memiliki nilai **cross entropy yang kecil**, sedangkan model yang buruk akan memiliki nilai _cross entropy_ yang besar. Sebetulnya ini terkait dengan perhitungan probabilitas sebelumnya, model yang baik akan memiliki probabilitas yang besar, dimana hasil operasi negatif dari logaritma nilai yang besar (_cross entropy_) adalah nilai yang kecil. 
+
+{{< figure src="/images/2018/nn035.webp" title="Cross Entropy untuk model yang baik dan buruk" alt="Cross Entropy untuk model yang baik dan buruk" position="center" >}}
+
+Bahkan _cross entropy_ ini bisa diberlakukan untuk setiap titik, jadi bukan hanya penjumlahannya saja. Terlihat pada gambar berikut ini bahwa suatu titik yang salah dikasifikasikan (_misclassified_), akan memiliki nilai _cross entropy_ yang besar. Hal ini **mengingatkan kembali pada fungsi error**, dimana suatu titik yang salah diklasifikasikan akan memiliki nilai error yang besar, sebaliknya titik yang diklasifikasikan dengan benar akan memiliki nilai error yang kecil.
+
+{{< figure src="/images/2018/nn036.webp" title="Cross Entropy untuk titik yang diklasifikasikan benar dan salah" alt="Cross Entropy untuk titik yang diklasifikasikan benar dan salah" position="center" >}}
+
+Kembali membahas mengenai **mencari model yang terbaik**, sehingga saat ini tujuan (caranya) sudah berubah, dari memaksimalnya probabilitas, menjadi **meminimalkan nilai cross entropy**. Sebagai hasil keterhubungan antara probabilitas dan fungsi error.
+
+{{< figure src="/images/2018/nn037.webp" title="Model yang terbaik ditentukan dengan nilai cross entropy yang minimum" alt="Model yang terbaik ditentukan dengan nilai cross entropy yang minimum" position="center" >}}
+
+Konsep _cross entropy_ ini sangat popular di berbagai bidang, salah satunya Machine Learning. Formulanya adalah
+
+> Cross-Entropy = $-\sum_{i=1}^m y\_iln(p\_i) + (1 - y\_i)ln(1 - p\_i)$
+
+Untuk dalam kasus di gambar berikut adalah:
+
+* $i$ akan bernilai 1 sampai $m$ yaitu 3 (jumlah banyaknya _event_ dalam hal ini jumlah pintu)
+* $p\_1$ adalah **probabilitas untuk ada hadiah** di pintu ke-1, sebaliknya $(1 - p\_1)$ adalah **probabilitas untuk tidak ada hadiah** di pintu ke-1. begitu juga untuk $p\_2$ dan $(1 - p\_2)$ serta $p\_3$ dan $(1 - p\_3)$.
+* $y_1$ akan bernilai **1 jika ada hadiah** di pintu ke-1 atau bernilai **0 tidak tidak ada hadiah** di pintu ke-1. begitu juga untuk $y\_2$ serta $y\_3$.
+
+{{< figure src="/images/2018/nn038.webp" title="Contoh kasus untuk formula Cross-Entropy" alt="Contoh kasus untuk formula Cross-Entropy" position="center" >}}
+
+Sebagai contoh, melakukan kalkulasi _cross-entropy_ untuk pasangan:
+
+* `cross_entropy((1, 1, 0), (0.8, 0.7, 0.1))` menghasilkan 0.69.
+
+  di sini (1, 1, 0) adalah nilai dari ($y\_1$, $y\_2$, $y\_3$).
+
+  di sini (0.8, 0.7, 0.1) adalah nilai dari ($p\_1$, $p\_2$, $p\_3$).
+  
+  menghasilkan nilai _cross-entropy_ yang kecil, karena (1, 1, 0) itu mirip (_similar_) dengan vector (0.8, 0.7, 0.1).
+  
+  artinya pengaturan hadiah dengan kumpulan nilai (1, 1, 0) **kemungkinan besar terjadi** berdasarkan nilai propabilitas dengan kumpulan nilai (0.8, 0.7, 0.1).
+
+* `cross_entropy((0, 0, 1), (0.8, 0.7, 0.1))` menghasilkan 5.12.
+
+  di sini (0, 0, 1) adalah nilai dari ($y\_1$, $y\_2$, $y\_3$)).
+  di sini (0.8, 0.7, 0.1) adalah nilai dari ($p\_1$, $p\_2$, $p\_3$).
+
+  menghasilkan nilai _cross-entropy_ yang besar, karena (0, 0, 1) itu tidak mirip dengan vector (0.8, 0.7, 0.1).
+
+  artinya pengaturan hadiah dengan kumpulan nilai (1, 1, 0) **kemungkinan besar tidak terjadi** berdasarkan nilai probabilitas dengan kumpulan nilai (0.8, 0.7, 0.1).
+
+{{< figure src="/images/2018/nn039.webp" title="Cross-Entropy menginformasikan kemiripan 2 vector" alt="Cross-Entropy menginformasikan kemiripan 2 vector" position="center" >}}
+
+Seperti apa kode dari formula `cross_entropy(Y, P)` dimana `Y` adalah `List` kategori dan `P` adalah `List` probabilitas?
+
+ternyata di quiz ini udacity menggunakan salah satu contoh dengan data berikut; `Y` bernilai `[1, 0, 1, 1]` dan `P` bernilai  `[0.4, 0.6, 0.1, 0.5]`.
+
+* kita bisa menggunakan fungsi `zip()` untuk sekaligus mengiterasi `Y` dan `P`. Atau, pilihan yang lain, kita menggunakan kemampuan _broadcast_ dari NumPy sehingga tidak perlu melakukan iterasi secara manual, dengan catatan bahwa kita perlu konversi `List` menjadi NumPy array, misalnya dengan fungsi `np.array(Y)` atau jika kita mau konversi semua isinya menjadi NumPy array bertipe float, kita gunakan `np.float_(P)`.
+* lalu kita hitung perkalian $y\_1 * log(p\_1)$ sebagai `_y * np.log(_p)`, dengan fungsi logaritma dari NumPy. di NumPy `np.log` itu menggunakan basis $e$ sedangkan basis 10 adalah `np.log10`. jangan lupa bahwa `np.log` itu bisa melakukan operasi _broadcast_ sehingga perkalian dengan setiap elemen tidak perlu iterasi.
+* lalu kita hitung perkalian $(1-y\_1) * log(1-p\_1)$ sebagai `(1-_y) * np.log(1-_p)`
+* tambahkan semuanya, untuk penggunaan _broadcast_ bisa menggunakan fungsi `np.sum` dari NumPy, terakhir jangan lupa kalikan dengan `-1.0` untuk mendapatkan _cross-entropy_
+
+Jika berhasil, artinya kita sudah membuat kode _cross-entropy_ untuk 4 events (kemungkinan hadiah akan muncul di pintu), yaitu pada contoh sebelumnya artinya untuk 4 pintu. :raised_hands:
+
+### Multi-class Cross-Entropy
+
+Jika sebelumnya hanya membahas klasifikasi 2 (_binary_) tentang ada atau tidaknya hadiah di balik pintu, lalu bagaimana kalo mencoba melakukan klasifikasi 3 (atau lebih), misalnya menebak binatang apa di balik pintu, apakah bebek (_duck_), berang-berang (_beaver_), atau anjing laut (_walrus_)?
+
+Sebagai contoh gambar berikut berisi probabilitas dari bebek berada di pintu ke-1 adalah 0.7, berang-berang berada di pintu ke-1 adalah 0.2, anjing laut berada di pintu ke-1 adalah 0.1, dan selanjutnya untuk pintu ke-2 serta ke-3. Jika diperhatikan <u>total dari probabilitas di setiap pintu (kolom) adalah 1</u>, artinya ada sudah pasti 1 satu binatang di balik pintu, hanya saja kemungkinannya berbeda-beda, dan juga artinya ada kemungkinan lebih dari satu pintu akan muncul binatang yang sama, misalnya anjing laut di pintu 2 dan juga anjing laut di pintu 3.
+
+{{< figure src="/images/2018/nn040.webp" title="Tabel probabilitas untuk Multi-class Cross-Entropy" alt="Tabel probabilitas untuk Multi-class Cross-Entropy" position="center" >}}
+
+Perhitungan _cross-entropy_-nya akan sama dengan sebelumnya, penjumlahan negatif logaritma dari probabilitas event.
+
+{{< figure src="/images/2018/nn041.webp" title="Multi-class Cross-Entropy" alt="Multi-class Cross-Entropy" position="center" >}}
+
+Berikut adalah formula dari _Multi-class Cross-Entropy_
+
+> Multi-class Cross-Entropy = $- \sum_{i=1}^{n} \sum_{j=1}^{m} y\_i\_j ln(p\_i\_j)$
+
+dengan catatan:
+
+* $n$ adalah jumlah (multi) class, dalam hal ini n = 3 (duck, beaver, walrus). ya, aku tau bahwa ini **tidak sesuai seperti gambar** dan penjelasan di video, meskipun nilainya sama dengan $m$. Dalam formula di atas, variable $i$ akan iterasi dari $1$ sampai $n$.
+* $m$ adalah jumlah pintu, dalam hal ini m = 3. Dalam formula di atas, variabel $j$ akan iterasi dari $1$ sampai $m$. Terlihat dalam gambar di bawah, $j$ tertulis di pintu.
+* $p\_i\_j$ adalah probabilitas untuk _event_ (kemunculan) dari class $i$ di pintu $j$.
+* $y\_i\_j$ akan bernilai $1$ jika muncul class $i$ di pintu $j$, sebaliknya akan bernilai $0$.
+
+Seperti sebelumnya, muncul pertanyaan, jika formula _Multi-class Cross-Entropy_ ini diberikan nilai class = 2, apakah sama formulanya dengan _Cross-Entropy_? Jawabnya sama. (masih butuh referensi tambahan untuk penurunan formulanya :thinking: ).
 
 
 
@@ -347,3 +576,5 @@ Karena pembahasannya panjang, hanya terkait untuk kode ini, maka dibuatkan halam
 [^1]: https://en.wikipedia.org/wiki/XOR_gate
 [^2]: https://en.wikipedia.org/wiki/Exclusive_or
 [^3]: https://stackoverflow.com/a/4715330/3991504
+[^4]: http://deeplearning.stanford.edu/tutorial/supervised/SoftmaxRegression/
+[^5]: https://en.wikipedia.org/wiki/Logarithm

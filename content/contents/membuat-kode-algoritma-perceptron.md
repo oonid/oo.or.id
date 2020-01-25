@@ -91,11 +91,11 @@ Kode program di sistem Udacity di awal akan memanggil fungsi `trainPerceptronAlg
   *  `X.T[0]` artinya yang tadinya merupakan kolom pertama, yakni berisi data semua nilai `x` yang diplot di koordinat kartesian, diubah jadi baris pertama, sebuah vector. Dicari nilai min dan max untuk kebutuhan plot data.
   *  `X.T[1]` artinya yang tadinya kolom kedua, yang berisi data semua nilai `y` yang diplot di koordinat kartesian, diubah menjadi baris kedua, sebuah vector. Dicari nilai min dan max untuk kebutuhan plot data.
 * `W` adalah sebuah matrix `2 x 1` (2 baris, 1 kolom), yang diinisialisasi dengan nilai random dari NumPy.
-* `b` adalah bias, merupakan sebuah skalar, yang diinisialisasi dengan nilai random dari NumPy, kemudian ditambahkan `x_max` agar nilainya pasti lebih besar dari semua nilai `x` di dataset. Hal ini bertujuan untuk(?)
+* `b` adalah bias, merupakan sebuah skalar, yang diinisialisasi dengan nilai random dari NumPy, kemudian ditambahkan `x_max` pada saat inisialisasi agar hasil plot keluarannya lebih fokus atau rapat (ini hanya asumsi saja, karena sudah dicoba tanpa menambahkan `x_max` bedanya adalah proses plot nya jaraknya lebih renggang). 
 * (proses `perceptronStep()`)
 * untuk menampilkan sejumlah garis hasil penggeseran, datanya disimpan di `boundary_lines`. Data _weights_ `W` dan _bias_ `b` yang didapatkan dari `perceptronStep()` ditambahkan sebagai `(-W[0]/W[1], -b/W[1])`.
   * `W[0]` dan `W[1]` karena _weights_ adalah sebuah matrix `2 x 1`. `W[0]` adalah bobot untuk `x` kartesian, `W[1]` adalah bobot untuk `y` kartesian.
-  * Kemudian menggunakan nilai negatif dalam `-W[0]/W[1]` dengan tujuan untuk(?), menggunakan nilai negatif dalam `-b/W[1]` dengan tujuan untuk(?).
+  * Kemudian menggunakan nilai negatif dalam `-W[0]/W[1]` dan `-b/W[1]` diprediksi karena mekanisme plotting yang digunakan di kelas membutuhkan gradien negatif tersebut.
 
 ```python
 def perceptronStep(X, y, W, b, learn_rate = 0.01):
@@ -134,7 +134,7 @@ Catatan:
 
   
 
-*  menarik untuk menghitung total **misclasified** sejak awal _epoch_, sehingga menjadi patokan, apakah total _misclasified_ tersebut menurut dalam iterasi atau tidak. ada kemungkinan, tidak perlu jumlah _epoch_ terlalu banyak karena sebetulnya total _misclasified_-nya pun sudah tidak turun lagi.
+*  menarik untuk menghitung total **misclasified** sejak awal _epoch_, sehingga menjadi patokan, apakah total _misclasified_ tersebut menurut dalam iterasi atau tidak. ada kemungkinan, tidak perlu jumlah _epoch_ terlalu banyak karena sebetulnya total _misclasified_-nya pun sudah tidak turun lagi. nantinya ini akan menjadi semacam fungsi error, tapi nanti dijelaskan lebih lanjut bahwa fungsi itu seharusnya bukan bilang bulat (_discrete_), tapi pecahan (_continuous_).
 
 ### Dataset
 
