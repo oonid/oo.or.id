@@ -554,16 +554,18 @@ Perhitungan _cross-entropy_-nya akan sama dengan sebelumnya, penjumlahan negatif
 
 {{< figure src="/images/2018/nn041.webp" title="Multi-class Cross-Entropy" alt="Multi-class Cross-Entropy" position="center" >}}
 
-Berikut adalah formula dari _Multi-class Cross-Entropy_
+Berikut adalah formula dari _Multi-class Cross-Entropy_:
 
-> Multi-class Cross-Entropy = $- \sum_{i=1}^{n} \sum_{j=1}^{m} y\_i\_j ln(p\_i\_j)$
+> Multi-class Cross-Entropy = $-\sum\_{i=1}^n \sum\_{j=1}^m y\_{ij} ln(p\_{ij})$
 
 dengan catatan:
 
-* $n$ adalah jumlah (multi) class, dalam hal ini n = 3 (duck, beaver, walrus). ya, aku tau bahwa ini **tidak sesuai seperti gambar** dan penjelasan di video, meskipun nilainya sama dengan $m$. Dalam formula di atas, variable $i$ akan iterasi dari $1$ sampai $n$.
-* $m$ adalah jumlah pintu, dalam hal ini m = 3. Dalam formula di atas, variabel $j$ akan iterasi dari $1$ sampai $m$. Terlihat dalam gambar di bawah, $j$ tertulis di pintu.
-* $p\_i\_j$ adalah probabilitas untuk _event_ (kemunculan) dari class $i$ di pintu $j$.
-* $y\_i\_j$ akan bernilai $1$ jika muncul class $i$ di pintu $j$, sebaliknya akan bernilai $0$.
+* $n$ adalah jumlah (multi) class, dalam hal ini n = 3 (duck, beaver, walrus). ya, aku tau bahwa ini **tidak sesuai seperti gambar di bawah** dan penjelasan di video, meskipun nilainya sama dengan $m$. Dalam formula di atas, variable $i$ akan iterasi dari `1` sampai $n$.
+* $m$ adalah jumlah pintu, dalam hal ini m = 3. Dalam formula di atas, variabel $j$ akan iterasi dari `1` sampai $m$. Terlihat dalam gambar di bawah, $j$ tertulis di pintu.
+* $p\_{ij}$ adalah probabilitas untuk _event_ (kemunculan) dari class $i$ di pintu $j$.
+* $y\_{ij}$ akan bernilai `1` jika muncul class $i$ di pintu $j$, sebaliknya akan bernilai `0`.
+
+{{< figure src="/images/2018/nn042.webp" title="Formula Multi-class Cross-Entropy" alt="Formula Multi-class Cross-Entropy" position="center" >}}
 
 Seperti sebelumnya, muncul pertanyaan, jika formula _Multi-class Cross-Entropy_ ini diberikan nilai class = 2, apakah sama formulanya dengan _Cross-Entropy_? Jawabnya sama. (masih butuh referensi tambahan untuk penurunan formulanya :thinking: ).
 
@@ -575,6 +577,6 @@ Seperti sebelumnya, muncul pertanyaan, jika formula _Multi-class Cross-Entropy_ 
 
 [^1]: https://en.wikipedia.org/wiki/XOR_gate
 [^2]: https://en.wikipedia.org/wiki/Exclusive_or
-[^3]: https://stackoverflow.com/a/4715330/3991504
-[^4]: http://deeplearning.stanford.edu/tutorial/supervised/SoftmaxRegression/
+[^3]: [XOR from only OR and AND](https://stackoverflow.com/a/4715330/3991504)
+[^4]: [SoftmaxRegression tutorial deeplearning.stanford.edu](http://deeplearning.stanford.edu/tutorial/supervised/SoftmaxRegression/)
 [^5]: https://en.wikipedia.org/wiki/Logarithm
