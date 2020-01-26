@@ -556,18 +556,157 @@ Perhitungan _cross-entropy_-nya akan sama dengan sebelumnya, penjumlahan negatif
 
 Berikut adalah formula dari _Multi-class Cross-Entropy_:
 
-> Multi-class Cross-Entropy = $-\sum\_{i=1}^n \sum\_{j=1}^m y\_{ij} ln(p\_{ij})$
+> Multi-class Cross-Entropy = $-\sum\_{i=1}^m \sum\_{j=1}^n y\_{ij} ln(p\_{ij})$
 
-dengan catatan:
+dengan catatan, ini $\sum\_{i=1}^m$ dengan $\sum\_{j=1}^n$ dibalik posisinya dibandingkan dengan yang ada di gambar di bawah (di video kelas):
 
-* $n$ adalah jumlah (multi) class, dalam hal ini n = 3 (duck, beaver, walrus). ya, aku tau bahwa ini **tidak sesuai seperti gambar di bawah** dan penjelasan di video, meskipun nilainya sama dengan $m$. Dalam formula di atas, variable $i$ akan iterasi dari `1` sampai $n$.
-* $m$ adalah jumlah pintu, dalam hal ini m = 3. Dalam formula di atas, variabel $j$ akan iterasi dari `1` sampai $m$. Terlihat dalam gambar di bawah, $j$ tertulis di pintu.
+* $m$ adalah jumlah (multi) class, dalam hal ini m = 3 (duck, beaver, walrus). Dalam formula di atas, variable $i$ akan iterasi dari `1` sampai $m$.
+* $n$ adalah jumlah pintu, dalam hal ini n = 3. Dalam formula di atas, variabel $j$ akan iterasi dari `1` sampai $n$. Terlihat dalam gambar di bawah, $j$ tertulis di pintu.
 * $p\_{ij}$ adalah probabilitas untuk _event_ (kemunculan) dari class $i$ di pintu $j$.
 * $y\_{ij}$ akan bernilai `1` jika muncul class $i$ di pintu $j$, sebaliknya akan bernilai `0`.
 
 {{< figure src="/images/2018/nn042.webp" title="Formula Multi-class Cross-Entropy" alt="Formula Multi-class Cross-Entropy" position="center" >}}
 
 Seperti sebelumnya, muncul pertanyaan, jika formula _Multi-class Cross-Entropy_ ini diberikan nilai class = 2, apakah sama formulanya dengan _Cross-Entropy_? Jawabnya sama. (masih butuh referensi tambahan untuk penurunan formulanya :thinking: ).
+
+### Algoritma Logistic Regression
+
+Pada dasarnya langkah yang dilakukan seperti ini:
+
+* ambil data
+* pilih model secara acak
+* hitung error
+* minimalkan nilai error, dan dapatkan model yang lebih baik
+* enjoy!
+
+berikutnya akan dijelaskan beberapa langkah yang terkait.
+
+### Menghitung fungsi Error
+
+{{< figure src="/images/2018/nn043.webp" title="Error dan Fungsi Error untuk Klasifikasi Binary" alt="Error dan Fungsi Error untuk Klasifikasi Binary" position="center" >}}
+
+Di sini Error pada satu _point_ dengan prediksi untuk klasifikasi _binary_ adalah
+
+> Error = $- (1 - y)(ln(1 - \hat{y})) - yln(\hat{y})$
+
+dimana $y$ adalah label bernilai $1$ jika _blue_ (salah satu klasifikasi), atau bernilai $0$ jika _red_ (klasifikasi lainnya). probabilitas dari _blue_ atau $P(blue)$ adalah $\hat{y}$, artinya probabilitas dari red adalah $(1 - \hat{y})$, karena probabilitas dari _red_ adalah 1 - probabilitas dari _blue_ untuk kondisi klasifikasi _binary_.
+
+Fungsi Error untuk klasifikasi _binary_ (2 _class_) adalah
+
+> Error Function = $-\frac{1}{m} \sum\_{i=1}^m y\_{i} ln(\hat{y\_{i}}) + (1 - y\_i) ln(1 - \hat{y\_{i}})$
+
+dimana prediksi $\hat{y\_i} = \sigma(Wx^{(i)} + b)$, fungsi Sigmoid dari fungsi linear $Wx + b$, dengan $y\_i$ adalah _label_ dari point $x^{(i)}$, artinya
+
+> E(W, b) = $-\frac{1}{m} \sum\_{i=1}^m y\_{i} ln(\sigma(Wx^{(i)}+b)) + (1 - y\_i) ln(1 - \sigma(Wx^{(i)}+b))$
+
+{{< figure src="/images/2018/nn044.webp" title="Error untuk Klasifikasi Binary dan Multi-class" alt="Error untuk Klasifikasi Binary dan Multi-class" position="center" >}}
+
+Fungsi Error untuk klasifikasi multi-class (3 _class_ atau lebih) adalah
+
+> error = $-\frac{1}{m} \sum\_{i=1}^m \sum\_{j=1}^n y\_{ij} ln(\hat{y\_{ij}})$
+
+### Meminimalkan fungsi Error
+
+Dengan fungsi Error seperti dituliskan di atas **E(W, b)** dimana fungsi Error sebagai fungsi dari _weights_ kemudian tujuan kita adalah meminimalkan fungsi Error ini.
+
+Kita mulai di awal dengan memberikan nilai _weights_ secara acak **E(W,b)**, dimana menghasilkan prediksi dengan fungsi Sigmoid, $\sigma(x) = Wx + b$. Dengan fungsi Error yang didefinisikan
+
+> E(W, b) = $-\frac{1}{m} \sum\_{i=1}^m y\_{i} ln(\sigma(Wx^{(i)}+b)) + (1 - y\_i) ln(1 - \sigma(Wx^{(i)}+b))$
+
+Fungsi Error tersebut merupakan penjumlahan dari Error untuk setiap _point_, dimana menghasilkan nilai Error yang besar apabila salah klasifikasi (_misclassified_), sebaliknya nilai Error yang kecil apabila dikasifikasikan dengan benar.
+
+{{< figure src="/images/2018/nn045.webp" title="Meminimalkan fungsi Error dengan nilai weights baru" alt="Meminimalkan fungsi Error dengan nilai weights baru" position="center" >}}
+
+Proses meminimalkan fungsi Error dengan menggunakan **Gradient Descent** (yang akan dibahas berikutnya), hingga dengan nilai _weights_ baru **E(W',b')** menghasilkan fungsi Error yang nilainya minimal, berdasarkan prediksi dengan fungsi Sigmoid, $\sigma(x) = W'x + b'$.
+
+### Perhitungan _Gradient_
+
+Untuk mencari nilai minimal fungsi error, kita perlu membuat turunan (_derivative_) dari fungsi error. Ini sama dengan pelajaran matematika (kalkulus) tentang gradien.
+
+Kita bahas dahulu turunan dari fungsi Sigmoid, berikut adalah fungsi Sigmoid:
+
+> $\sigma(x) = \frac{1}{1+e^{-x}}$
+
+Turunan dari fungsi Sigmoid terhadap $x$ adalah ($\frac{\partial}{\partial(x)}$ adalah notasi partial derivative)
+
+> $\sigma'(x) = \frac{\partial}{\partial(x)} \frac{1}{1+e^{-x}}$
+>
+> $ = \frac{e^{-x}}{(1+e^{-x})^2}$
+>
+> $ = \frac{1}{1+e^{-x}} \frac{e^{-x}}{1+e^{-x}}$
+>
+> $ = \frac{1}{1+e^{-x}} (\frac{1+e^{-x}}{1+e^{-x}} - \frac{1}{1+e^{-x}})$
+>
+> $\sigma'(x) = \sigma{(x)} (1 - \sigma(x))$
+
+### Algoritma Gradient Descent
+
+Kembali membahas fungsi Error. Jika punya $m$ _points_ yang dengan label $y\_1$, $y\_2$, ..., $y_m$, maka fungsi Error nya adalah
+
+> $E = -\frac{1}{m} \sum\_{i=1}^m (y\_{i} ln(\hat{y\_{i}}) + (1 - y\_i) ln(1 - \hat{y\_{i}}))$
+
+Dimana prediksi $\hat{y} = \sigma(Wx^{(i)} + b)$
+
+Tujuan kita adalah menghitung gradien dari $E$, di titik $x = (x\_1, ..., x\_n)$, dihasilkan dari _parsial derivative_
+
+> $\nabla{E} = (\frac{\partial}{\partial{w\_1}}E, ..., \frac{\partial}{\partial{w\_n}}E, \frac{\partial}{\partial{b}}E)$
+
+TODO
+
+>  $\frac{\partial}{\partial{w\_j}}\hat{y} = \hat{y}(1-\hat{y}).x\_j$
+
+TODO
+
+> $\frac{\partial}{\partial{w\_j}}E = -(y - \hat{y}).x\_j$
+
+Dengan perhitungan yang mirip, kita bisa mendapatkan
+
+> $\frac{\partial}{\partial{b}}E = -(y - \hat{y})$
+
+Kesimpulannya, gradien sebagai berikut
+
+> $\nabla{E} = -(y - \hat{y})(x\_1, ..., x\_n, 1)$
+>
+> Gradien sebetulnya adalah sebuah skalar kali koordinat dari _point_.
+>
+> Di sini skalar adalah sejumlah perbedaan antara _label_ dan prediksi.
+>
+> ini sama dengan **Algoritma Perceptron**
+
+
+### Gradient Descent Step
+
+Dengan _gradient descent step_ sesederhana mengurangkan sejumlah gradien dari fungsi Error untuk semua titik, maka pembaruan _weights_ menggunakan langkah berikut:
+
+>  $w'\_i \leftarrow w\_i - \alpha [ -(y - \hat{y}) x\_i ]$
+
+yang mana ekivalen dengan
+
+>  $w'\_i \leftarrow w\_i + \alpha (y - \hat{y} x\_i)$
+
+Langkah yang sama untuk pembaruan _bias_ berikut:
+
+> $b' \leftarrow b + \alpha (y - \hat{y})$
+
+Catatan: Dengan mengambil nilai rata-rata dari Error, istilah yang digunakan seharusnya $\frac{1}{m}.\alpha$ daripada $\alpha$, tapi karena $\alpha$ adalah konstanta, untuk menyederhanakan kalkulasi, kita akan menggunakan $\frac{1}{m}.\alpha$ sebagai _learning rate_ dalam perhitungan, tapi penulisan notasi <u>dibiarkan</u> tetap memanggilnya $\alpha$.
+
+### Algoritma Logistic Regression
+
+Berikut adalah pseudo-code untuk Algoritma _Logistic Regression_
+
+1. Dimulai dengan memilih _weights_ secara acak: $w\_1, ..., w\_n, b$
+
+2. Untuk semua titik dengan koordinat $(x\_1, ..., x\_n)$:
+
+    2.1. Untuk `i=1 ... n`:
+
+    .. 2.1.1. Perbarui $w'\_i \leftarrow w\_i - \alpha \frac{\partial{E}}{\partial{w\_i}}$ dimana $\frac{\partial{E}}{\partial{w\_i}} = (\hat{y}-y)x\_i$
+
+    .. 2.1.2. Perbarui $b' \leftarrow b - \alpha \frac{\partial{E}}{\partial{b}}$ dimana $\frac{\partial{E}}{\partial{b}} = (\hat{y}-y)$
+
+3. Ulangi hingga Error jadi kecil, atau ulangi sejumlah kali, jumlah ini biasa disebut _epochs_.
+
+Jika dilihat, ini sama dengan **Algoritma Perceptron**
 
 
 
