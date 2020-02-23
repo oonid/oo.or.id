@@ -8,7 +8,7 @@ tags: ["Udacity", "PyTorch", "Machine Learning"]
 draft: false
 ---
 
-{{< figure src="/images/2018/pytorchudacityscholar.png" title="PyTorch Udacity Scholarship Challenge" >}}
+{{< figure src="/images/2018/pytorchudacityscholar.webp" title="PyTorch Udacity Scholarship Challenge" >}}
 
 Mendapatkan beasiswa dari Facebook untuk mengikuti tantangan belajar PyTorch di Udacity.
 

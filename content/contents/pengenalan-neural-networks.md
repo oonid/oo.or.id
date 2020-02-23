@@ -413,7 +413,7 @@ Jika sebelumnya jika hanya membahas klasifikasi dua _class_ (_binary classificat
 
 Untuk dapat melakukan prediksi dengan nilai _continues_ seperti halnya fungsi _Sigmoid_, untuk klasifikasi 3 _class_ atau lebih, menggunakan fungsi **Softmax**. _Probability_ dari class $i$, dengan _score_ dari fungsi linear bernilai $z\_1, ..., z\_n$.
 
-> $P(i) = \frac{e^z\_i}{e^z\_1 + ... + e^z\_n}$
+> $P(i) = \frac{e^{z\_i}}{e^{z\_1} + ... + e^{z\_n}}$
 
 Fungsi _eksponential_ atau $e$ adalah sebuah fungsi yang selalu memberikan nilai positif untuk semua masukan, baik itu masukannya positif ataupun negatif, besar ataupun kecil.
 
