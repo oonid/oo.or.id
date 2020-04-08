@@ -13,7 +13,7 @@ draft: false
 {{< figure src="/images/2018/pytorchudacityscholar.webp" title="Pengenalan Neural Networks" alt="Pengenalan Neural Networks" position="center" >}}
 
 
-> Tulisan ini adalah catatan belajar PyTorch Udacity Scholar nd188. Semua gambar milik kelas tersebut.
+> Tulisan ini adalah catatan belajar PyTorch Udacity Scholar nd188. Semua gambar milik kelas tersebut. Kelas ini sekarang tersedia FREE sebagai [ud188](https://www.udacity.com/course/deep-learning-pytorch--ud188).
 
 Neural Networks adalah inti dari Deep Learning, dimana sebetulnya berusaha menirukan bagaimana otak bekerja, dengan syaraf-syaraf yang mengirimkan informasi satu sama lain.
 

@@ -15,3 +15,5 @@ Mendapatkan beasiswa dari Facebook untuk mengikuti tantangan belajar PyTorch di 
 Terima kasih Facebook dan Udacity!
 
 Kesempatan baru lagi untuk mendalami Neural Networks.
+
+Kelas ini sekarang tersedia _FREE_ sebagai [ud188](https://www.udacity.com/course/deep-learning-pytorch--ud188).
