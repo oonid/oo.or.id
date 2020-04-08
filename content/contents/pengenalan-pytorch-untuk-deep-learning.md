@@ -11,7 +11,7 @@ draft: false
 {{< figure src="/images/2018/pytorchudacityscholar.webp" title="Pengenalan Neural Networks" alt="Pengenalan Neural Networks" position="center" >}}
 
 
-> Tulisan ini adalah catatan belajar PyTorch Udacity Scholar nd188. Sebagian gambar milik kelas tersebut.
+> Tulisan ini adalah catatan belajar PyTorch Udacity Scholar nd188. Semua gambar milik kelas tersebut. Kelas ini sekarang tersedia FREE sebagai [ud188](https://www.udacity.com/course/deep-learning-pytorch--ud188).
 
 Instalasi paket **torch** dan **torchvision**, sesuaikan dengan paket manager yang digunakan [^1], misalnya **pip** atau **conda**.
 
