@@ -4,7 +4,7 @@ date: 2020-03-28T23:21:19+08:00
 publishDate: 2020-03-28T23:21:19+08:00
 image: "/images/2020/coursera_google_it_automation_with_python_certificates.png"
 url: "/content/ulasan-kursus-coursera-google-it-automation-with-python"
-tags: ["Google"]
+tags: ["python", "Coursera", "Google", "git", "Linux"]
 draft: false
 ---
 
