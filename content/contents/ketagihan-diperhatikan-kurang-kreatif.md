@@ -60,5 +60,7 @@ Sekarang kita bisa kembali memberikan perhatian pada hal lain lagi! terima kasih
 
 
 
+Foto oleh [Marco Gnaccarini](https://unsplash.com/@marcognaccarini?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
 [^1]: https://youtu.be/5giS_Ka9TKY
 
