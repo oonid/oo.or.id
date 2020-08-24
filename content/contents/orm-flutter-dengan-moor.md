@@ -22,7 +22,7 @@ Contohnya untuk berinteraksi dengan basis data SQLite, di Flutter untuk aplikasi
 
 Sebagai alternatif, **pilihannya adalah `moor`** [^2], yang juga merupakan plugin untuk berinteraksi dengan basis data SQLite. `moor` ini anagram (utak-atik huruf) dari `room`, yang di platform Android merupakan nama pustaka untuk akses basis data. Dan serunya lagi, `moor` tidak hanya mendukung sintaksis SQL, juga secara mendasar mendukung konsep ORM, dimana kita mendefinisikan struktur tabel serta interaksinya dengan bahasa pemrograman Dart. Buat yang memrogram Dart secara reaktif, pustakan ini juga punya dukungan untuk pemrograman reaktif, dengan menghasilkan keluaran dari query berupa _stream_ yang terus-menerus diperbarui. `moor` mendukung untuk pembuatan aplikasi Flutter di banyak platform, termasuk juga di platform web dan Linux yang sedang dieksplorasi.
 
-Di sisi lain, dalam menggunakan moor untuk menyimpan data ini tidak ada cara langsung yang mudah (_straigh forward_), dimana kita perlu melakukan beberapa langkah terlebih dahulu. :thinking:
+Di sisi lain, dalam menggunakan `moor` untuk menyimpan data ini tidak ada cara langsung yang mudah (_straight forward_), dimana kita perlu melakukan beberapa langkah terlebih dahulu. :thinking:
 
 Menambahkan paket `moor` di `pubspec.yaml` bukan hanya satu atau dua baris seperti kebanyakan paket, tapi 6 baris yang perlu ditambahkan :joy:.
 
@@ -128,7 +128,29 @@ class MyDatabase extends _$MyDatabase {
 
 Pemanggilan method `.watch()` akan menghasilkan _stream_ yang secara otomatis akan menginformasikan jika ada perubahan data, misalnya data baru.
 
-Untuk menggunakan `moor` hanya sebagai satu _instance_ saja, atau disebut _singleton_, kita dapat mengikuti pandual yang sudah disediakan [^4], dimana salah satu pilihannya adalah menggunakan `InheritedWidgets` atau menggunakan paket `provider` [^5] terutama bagi yang sudah menggunakan `provider` sebagai state management.
+Misalnya untuk melakukan penambahan data (_insert_), tambahkan _method_ pada `class MyDatabase` dengan kode berikut.
+
+```dart
+// returns the generated id
+Future<int> addTodo(TodosCompanion entry) {
+  return into(todos).insert(entry);
+}
+```
+
+Lalu pemanggilannya seperti berikut.
+
+```dart
+addTodo(
+  TodosCompanion(
+    title: Value('Important task'),
+    content: Value('Refactor persistence code'),
+  ),
+);
+```
+
+Dimana `TodosCompanion` tersebut merupakan salah satu yang dihasilkan pada proses pembangkitan. Lebih lanjut tentang penulisan `query` di dokumentasi dari `moor`.
+
+Untuk menggunakan `moor` hanya sebagai satu _instance_ saja, atau disebut _singleton_, kita dapat mengikuti panduan yang sudah disediakan [^4], dimana salah satu pilihannya adalah menggunakan `InheritedWidgets` atau menggunakan paket `provider` [^5] terutama bagi yang sudah menggunakan `provider` sebagai state management.
 
 Di bagian `runApp()`.
 
@@ -149,6 +171,27 @@ Di bagian yang membutuhkan (akses) instance dari basis data.
 ```dart
 Provider.of<MyDatabase>(context)
 ```
+
+Pada halaman paket `moor`[^2] disebutkan mengenai contoh pola untuk implementasi berbagai `platforms`, di aplikasi Todo bernama `moor_shared`[^6]. Dimana salah satu yang menarik ada bagaimana menyetel `TargetPlatform` di `moor_shared/lib/plugins/desktop/io.dart`.
+
+```dart
+void setTargetPlatformForDesktop({TargetPlatform platform}) {
+  TargetPlatform targetPlatform;
+  if (platform != null) {
+    targetPlatform = platform;
+  }
+  if (targetPlatform == null) {
+    if (Platform.isMacOS) {
+      targetPlatform = TargetPlatform.iOS;
+    } else if (Platform.isLinux || Platform.isWindows) {
+      targetPlatform = TargetPlatform.android;
+    }
+  }
+  debugDefaultTargetPlatformOverride = targetPlatform;
+}
+```
+
+Fungsi `setTargetPlatformForDesktop()` tersebut dipanggil sebelum `runApp()` di Flutter.
 
 Pustaka moor ini salah satunya bergantung pada pustaka sqlite3 [^3] untuk mengakses SQLite melalui `dart:ffi`, sehingga untuk keperluan penggunaan di Linux, perlu instalasi paket tambahan, misalnya sebagai berikut.
 
@@ -175,3 +218,4 @@ Foto oleh [NASA](https://unsplash.com/@nasa) di Unsplash
 [^4]: https://moor.simonbinder.eu/faq/#using-the-database
 [^5]: https://pub.dev/packages/provider
 
+[^6]: https://github.com/rodydavis/moor_shared

@@ -20,8 +20,8 @@ npm install parser-front-matter lunr
 
 ```bash
 node ./build-lunarjs-index.js > static/search-index.json
-hugo --cleanDestinationDir
-hugo --minify && firebase deploy
+HUGO_ENV=production nice hugo --cleanDestinationDir --minify --debug
+firebase deploy
 ```
 
 ### Authors
