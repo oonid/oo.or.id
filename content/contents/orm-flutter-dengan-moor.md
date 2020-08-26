@@ -4,7 +4,7 @@ date: 2020-08-08 20:08:08+08:00
 publishDate: 2020-08-08 20:08:08+08:00
 image: "/images/2020/object_relational_mapping_orm.webp"
 url: "/content/orm-flutter-dengan-moor"
-tags: ["Dart", Flutter", "ORM", "SQlite"]
+tags: ["Dart", "Flutter", "ORM", "SQlite"]
 draft: false
 ---
 
