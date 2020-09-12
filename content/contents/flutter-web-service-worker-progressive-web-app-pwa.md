@@ -12,6 +12,8 @@ draft: false
 
 Sejak pertengahan Januari 2020, ada penambahan fitur service worker di Flutter Web [^1]. Versi yang dikembangkan saat penambahan fitur tersebut adalah v1.14.x. Dengan adanya service worker, artinya kita bisa membuat Progressive Web App (PWA) [^2] dengan Flutter Web.
 
+Sebelum mulai membahas detailnya, kalo butuh diskusi seputar [pemrograman web dengan Dart, gabung di komunitas dart_web](https://oo.or.id/content/dart-web-group-discussion-bahasa-indonesia/).
+
 Pertama buat dulu proyek Flutter baru dengan dukungan web [^3].
 
 ```

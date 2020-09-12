@@ -61,7 +61,7 @@ disableHugoGeneratorInject = false
 
   [[params.social]]
     name = "youtube"
-    url  = "https://youtube.com/oonarfiandwi"
+    url  = "https://youtube.com/oonid"
 
   [[params.social]]
     name = "email"
