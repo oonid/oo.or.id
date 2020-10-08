@@ -5,7 +5,7 @@
 ### Prerequisites
 
 * hugo
-* node v12 for search index
+* node v14 for search index
 
 ### Installing
 
