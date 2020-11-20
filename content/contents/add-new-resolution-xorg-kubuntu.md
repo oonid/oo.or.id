@@ -4,7 +4,7 @@ date: 2016-10-14T01:33:50+07:00
 publishDate: 2016-10-14T01:33:50+07:00
 image: "/images/2016/kubuntu_logo.png"
 url: "/content/add-new-resolution-xorg-kubuntu"
-tags: ["Linux", "Xorg"]
+tags: ["Linux", "X11"]
 draft: false
 ---
 
