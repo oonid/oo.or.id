@@ -27,7 +27,7 @@ Awalnya tidak ingat kalo Desktop Manager masih butuh Window Manager untuk mengat
 
 ## Instalasi Linux
 
-Untuk Linux basisnya menggunakan Debian, karena installer yang dimiliki cukup kecil ukurannya, versi net install [^6], sekitar 370 MB.
+Untuk Linux basisnya menggunakan Debian (sudah dicoba untuk versi 9 dan 10), karena installer yang dimiliki cukup kecil ukurannya, versi net install [^6], sekitar 370 MB.
 
 Prosesnya dilakukan di VirtualBox agar memudahkan mengulang-ulang proses jika terjadi kesalahan.
 
@@ -37,13 +37,13 @@ Hasil instalasi minimalnya (tanpa memilih paket apa-apa, hanya basisnya) jika di
 
 Versi yang lebih ringkas dari paket `lxqt` adalah paket `lxqt-core`.
 
-Jika kita coba instalasi dengan `sudo apt install lqxt-core`, kita akan disajikan pilihan berikut:
+Jika kita coba instalasi dengan `sudo apt install lxqt-core`, kita akan disajikan pilihan berikut:
 
 > 591 newly installed.
 > Need to get 248 MB of archives.
 > After this operation, 1,060 MB of additional disk space will be used.
 
-Perhatikan bahwa ukurannya akan bertambah 1 GB hanya melengkapi instalasi `lxqt-core`, lalu apa pilihan lainnya? Yakni dengan instalasi tanpa menyertakan paket rekomendasinya, dengan `sudo apt --no-install-recommends install lqxt-core` hasilnya:
+Perhatikan bahwa ukurannya akan bertambah 1 GB hanya melengkapi instalasi `lxqt-core`, lalu apa pilihan lainnya? Yakni dengan instalasi tanpa menyertakan paket rekomendasinya, dengan `sudo apt --no-install-recommends install lxqt-core` hasilnya:
 
 > 162 newly installed.
 > Need to get 54.2 MB of archives.
@@ -61,13 +61,15 @@ Kalo memilih instalasi dengan `sudo apt --no-install-recommends install sddm`, m
 > Need to get 12.8 MB of archives. 
 > After this operation, 29.7 MB of additional disk space will be used.
 
-Setelahnya kita masih perlu menambahkan sejumlah paket lagi, dengan perintah: `sudo apt --no-install-recommends install desktop-base plymouth-label xauth xfonts-base`, dimana ini akan menambahkan:
+Setelahnya kita masih perlu menambahkan sejumlah paket lagi, dengan perintah: `sudo apt --no-install-recommends install desktop-base plymouth-label xauth xfonts-base`, di Debian 9 tidak ada paket `plymouth-label` jadi instalasi `plymouth` saja, dimana ini akan menambahkan:
 
 > 10 newly installed. 
 > Need to get 10.2 MB of archives. 
 > After this operation, 21.0 MB of additional disk space will be used.
 
 Dengan instalasi SDDM dan paket tambahan ini, jika kita melakukan reboot, menu `grub` sudah berubah jadi grafis, juga kita akan masuk ke mode grafis (GUI).
+
+Saat mengaktifkan sddm, misalnya dengan perintah `sudo systemctl start sddm` lalu kita cek status dengan perintah `sudo systemctl status sddm`, ada informasi tentang tema "debian-theme" yang tidak tersedia, salah satu pemecahannya dengan instalasi paket berikut: `sudo apt --no-install-recommends install sddm-theme-debian-maui`.
 
 ## Instalasi Openbox
 
@@ -79,7 +81,7 @@ Menggunakan perintah `sudo apt install openbox` akan menghasilkan:
 > Need to get 40.5 MB of archives. 
 > After this operation, 136 MB of additional disk space will be used.
 
-Dengan menggunakan perintah `sudo apt --no-install-recommends openbox` akan menghasilkan:
+Dengan menggunakan perintah `sudo apt --no-install-recommends install openbox` akan menghasilkan:
 
 > 23 newly installed. 
 > Need to get 4,623 kB of archives. 

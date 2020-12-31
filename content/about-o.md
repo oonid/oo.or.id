@@ -11,9 +11,9 @@ My name is **oon arfiandwi**.
 You can call me **Oon** or simply **O**.
 
 I was using [Google+](http://plus.google.com/u/0/102354805749063623353) to show the world that I am a real person :stuck_out_tongue_closed_eyes: but now they were gone.
-So I moved to [YouTube](https://youtube.com/oonarfiandwi "youtube channel oon arfiandwi").
+So I moved to [YouTube](https://youtube.com/oonid "youtube channel oon arfiandwi").
 
-<iframe src="https://www.youtube.com/embed/?listType=user_uploads&list=arfiandwi&controls=0" width="480" height="400"></iframe>
+{{< youtubechannel UUOGA5aJwf_9-E5cQ_Y95YaQ >}}
 
 I hope you enjoy the contents on my website.
 
