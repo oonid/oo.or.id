@@ -23,6 +23,8 @@ _seminggu kemudian..._
 
 {{< figure src="/images/2020/coursera_google_it_automation_with_python_certificates.png" title="Ulasan Kursus Coursera: Google IT Automation with Python" alt="Ulasan Kursus Coursera: Google IT Automation with Python" position="center">}}
 
+[**UPDATE 2021-01-01**]: I finally continue the course and [finished the Specialization](https://oo.or.id/content/new-year-new-hope-2021/). I have updated the slides below.
+
 :joy:
 
 Ada kursus di Coursera namanya Google IT Automation with Python Professional Certificate [^1] dengan terdiri dari 6 kursus:
