@@ -12,7 +12,7 @@ draft: false
 
 > Logo aplikasi Gollum berbentuk cincin (ring)[^1], sesuai dengan adaptasi dari karakter fiksi Gollum di The Lord of The Rings[^2].
 
-Bulan Februari 2021 ini rencananya akan belajar topik Data Analyst, serta Data Science dimana materi keduanya beririsan. Melihat topik yang luas ini terbayang perlunya membuat "dasar pengetahuan" (_Knowledge Base_) untuk bisa merangkai dan menghubungkan berbagai pemahaman yang masih baru dipelajari.
+Bulan Februari 2021 ini rencananya akan belajar topik Data Analyst, serta sebagian Data Science dimana materi keduanya beririsan. Melihat topik yang luas ini terbayang perlunya membuat "dasar pengetahuan" (_Knowledge Base_) untuk bisa merangkai dan menghubungkan berbagai pemahaman yang masih baru dipelajari.
 
 Awalnya memang terpikir untuk membuat _mindmap_, lalu merasa bahwa tidak cocok untuk kebutuhan menuliskan catatan panjang bahkan sampai notasi matematika. Begitu juga papan kanban semacam Trello, meskipun cocok untuk membuat catatan yang canggih, tapi sulit mengakses relasi antar entitas (kartu), apalagi mendapatkan gambaran relasinya.
 
@@ -20,7 +20,7 @@ Saat ini yang terbayang adalah **Wiki**, ya seperti halnya Wikipedia[^3], kolabo
 
 Kalo Wikipedia[^3] menggunakan aplikasi MediaWiki[^5], Wiki Hyperledger menggunakan Confluence[^6] produk berbayar dari Atlassian. Oh satu lagi yang akan aku sebutkan adalah MoinMoin[^7] aplikasi yang digunakan sebagai Wiki Python.
 
-Nah yang akan aku gunakan ini fitur _free_ Wiki[^8] dari GitHub (_free_ untuk repo publik, atau berbayar untuk repo privat). Selain Wiki ini bisa langsung disunting (_edit_) di situs GitHub, ada aplikasi pendukung bernama Gollum[^1] yang bersifat _open source_ dari tim GitHub juga.
+Nah yang akan aku gunakan ini fitur _free_ Wiki[^8] dari GitHub (_free_ untuk repo publik, atau berbayar untuk repo privat). Selain Wiki ini bisa langsung disunting (_edit_) di situs GitHub, ada aplikasi pendukung bernama Gollum[^1] yang bersifat _open source_ dari tim GitHub juga. Salah satu hal yang aku perlukan dalam menggunakan Gollum ini adalah mekanisme pencarian (_search_) dari Wiki yang sudah ditulis, fitur ini tidak tersedia pada Wiki di GitHub.
 
 Sebagai contoh, aku buat Wiki di repo blog (publik) ini[^9]. Kemudian aku _clone_ ke lokal komputer.
 
@@ -36,14 +36,14 @@ $ ls -a
 .git    Home.md
 ```
 
-Selanjutnya, aku gunakan Gollum untuk menampilkan serta menyunting (_edit_) Wiki ini, menggunakan Docker resmi dari Gollum[^10].
+Selanjutnya, aku gunakan Gollum untuk menampilkan serta menyunting (_edit_) Wiki ini, menggunakan sistem Docker resmi dari Gollum[^10]. Ngomong-ngomong Gollum ini dikembangkan dengan bahasa pemrograman Ruby.
 
 ```bash
 $ docker pull gollumorg/gollum
 $ docker run -v `pwd`:/wiki -p 4567:4567 gollumorg/gollum
 ```
 
-Berikutnya adalah mengembangkan "dasar pengetahuan" yang akan aku tulis!
+Berikutnya membuka web Gollum ini peramban (_browser_) `http://localhost:4567` lalu mengembangkan "dasar pengetahuan" yang akan aku tulis dalam format `markdown` (.md)!
 
 
 [^1]: https://github.com/gollum
