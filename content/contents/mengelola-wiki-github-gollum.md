@@ -22,6 +22,8 @@ Kalo Wikipedia[^3] menggunakan aplikasi MediaWiki[^5], Wiki Hyperledger mengguna
 
 Nah yang akan aku gunakan ini fitur _free_ Wiki[^8] dari GitHub (_free_ untuk repo publik, atau berbayar untuk repo privat). Selain Wiki ini bisa langsung disunting (_edit_) di situs GitHub, ada aplikasi pendukung bernama Gollum[^1] yang bersifat _open source_ dari tim GitHub juga. Salah satu hal yang aku perlukan dalam menggunakan Gollum ini adalah mekanisme pencarian (_search_) dari Wiki yang sudah ditulis, fitur ini tidak tersedia pada Wiki di GitHub.
 
+Pemilihan aplikasi Wiki yang aku gunakan fokus pada kemudahan instalasi dan penggunaan. Dengan menggunakan Gollum[^1] maka tidak membutuhkan mekanisme penyimpanan seperti basis data, karena menggunakan Git sebagai _backend_. Kemudian dukungan sistem kontainer seperti Docker sehingga memudahkan proses instalasi dan memperbarui versinya di kemudian hari. Dari sisi penggunaan, aplikasi iberbasis web ini mudah digunakan dan tentunya kebutuhannya hanya peramban (_browser_).
+
 Sebagai contoh, aku buat Wiki di repo blog (publik) ini[^9]. Kemudian aku _clone_ ke lokal komputer.
 
 ```bash
