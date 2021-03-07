@@ -16,7 +16,7 @@ Bulan Februari 2021 ini rencananya akan belajar topik Data Analyst, serta sebagi
 
 Awalnya memang terpikir untuk membuat _mindmap_, lalu merasa bahwa tidak cocok untuk kebutuhan menuliskan catatan panjang bahkan sampai notasi matematika. Begitu juga papan kanban semacam Trello, meskipun cocok untuk membuat catatan yang canggih, tapi sulit mengakses relasi antar entitas (kartu), apalagi mendapatkan gambaran relasinya.
 
-Saat ini yang terbayang adalah **Wiki**, ya seperti halnya Wikipedia[^3], kolaborasi penulisan sehingga satu pengetahuan dengan pengetahuan lain relasinya cukup bisa digambarkan dengan baik. Mungkin ini hanya masalah preferensi, jadi belum tentu "dasar pengetahuan" model ini cocok untuk orang lain. Selain membawa wikipedia, yang cukup sering aku baca belakangan adalah Wiki Hyperledger[^4] dimana kontributornya membuat berbagai "dasar pengetahuan" di situ.
+Saat ini yang terbayang adalah **Wiki**, ya seperti halnya Wikipedia[^3], kolaborasi penulisan sehingga satu pengetahuan dengan pengetahuan lain relasinya cukup bisa digambarkan dengan baik. Mungkin ini hanya masalah preferensi, jadi belum tentu "dasar pengetahuan" model ini cocok untuk orang lain. Selain membaca wikipedia, yang cukup sering aku baca belakangan adalah Wiki Hyperledger[^4] dimana kontributornya membuat berbagai "dasar pengetahuan" di situ.
 
 Kalo Wikipedia[^3] menggunakan aplikasi MediaWiki[^5], Wiki Hyperledger menggunakan Confluence[^6] produk berbayar dari Atlassian. Oh satu lagi yang akan aku sebutkan adalah MoinMoin[^7] aplikasi yang digunakan sebagai Wiki Python.
 
