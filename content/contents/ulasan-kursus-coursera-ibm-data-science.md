@@ -51,7 +51,7 @@ Dalam waktu 1 bulan, 10 kursus berhasil diselesaikan dengan hasil memuaskan :100
 
 {{< figure src="/images/2021/coursera-ibm-data-science.png" title="Coursera IBM Data Science" alt="Coursera IBM Data Science" position="center">}}
 
-_The credential URL:_ https://www.coursera.org/account/accomplishments/specialization/certificate/8B5WMHCUGRQK
+_The credential URL:_ [8B5WMHCUGRQK](https://www.coursera.org/account/accomplishments/specialization/certificate/8B5WMHCUGRQK)
 
 Lalu apakah hal tersebut membuat aku menjadi seorang Data Sciencetist? **OH TENTU TIDAK** :pray:. Ini baru permulaan belajar dasarnya.
 

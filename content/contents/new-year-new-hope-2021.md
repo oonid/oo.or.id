@@ -16,4 +16,4 @@ Start the new year with new experiences. just finished my Coursera Specializatio
 
 Only needs few hours to finalize the capstone project, because previously [I have finished the other courses](https://oo.or.id/content/ulasan-kursus-coursera-google-it-automation-with-python/).
 
-The credential URL: https://www.coursera.org/account/accomplishments/specialization/certificate/HVT3DZW8MYW4
+The certificate credential: [HVT3DZW8MYW4](https://www.coursera.org/account/accomplishments/specialization/certificate/HVT3DZW8MYW4)
