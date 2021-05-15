@@ -53,7 +53,7 @@ Dalam waktu 1 bulan, 10 kursus berhasil diselesaikan dengan hasil memuaskan :100
 
 _The credential URL:_ [8B5WMHCUGRQK](https://www.coursera.org/account/accomplishments/specialization/certificate/8B5WMHCUGRQK)
 
-Lalu apakah hal tersebut membuat aku menjadi seorang Data Sciencetist? **OH TENTU TIDAK** :pray:. Ini baru permulaan belajar dasarnya.
+Lalu apakah hal tersebut membuat aku menjadi seorang Data Scientist? **OH TENTU TIDAK** :pray:. Ini baru permulaan belajar dasarnya.
 
 Seperti halnya sebelumnya (menyelesaikan sertifikat profesional [^4]), setelah menyelesaikan kursus mendapatkan akses ke komunitas privat untuk alumni di Coursera.
 

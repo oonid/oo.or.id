@@ -4,7 +4,7 @@ date: 2020-09-12 14:15:00+08:00
 publishDate: 2020-09-12 14:15:00+08:00
 image: "/images/2020/3000000_views_photos_google_maps.png"
 url: "/content/what-i-have-learned-building-static-site-100k-pages"
-tags: ["Static Site Generator", "Hugo", "Firebase", "Docker"]
+tags: ["Static Site Generator", "Hugo", "Firebase", "Docker", "Markdown"]
 draft: false
 
 ---
