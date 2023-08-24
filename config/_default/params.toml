@@ -1,0 +1,4 @@
+colorScheme = "blowfish"
+defaultAppearance = "dark"
+enableSearch = true
+footer.showThemeAttribution = false

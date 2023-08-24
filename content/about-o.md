@@ -13,13 +13,9 @@ You can call me **Oon** or simply **O**.
 I was using [Google+](http://plus.google.com/u/0/102354805749063623353) to show the world that I am a real person :stuck_out_tongue_closed_eyes: but now they were gone.
 So I moved to [YouTube](https://youtube.com/oonid "youtube channel oon arfiandwi").
 
-{{< youtubechannel UUOGA5aJwf_9-E5cQ_Y95YaQ >}}
-
 I hope you enjoy the contents on my website.
 
 You can contact me via email to oon(@)oo.or.id.
-
-Or check my social networks on [about.me](http://about.me/oon).
 
 > "You don't have to be a genius to know how to code" ~http://youtu.be/nKIu9yen5nc
 

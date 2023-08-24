@@ -1,0 +1,13 @@
+title = "OOn"
+
+[author]
+name = "oon arfiandwi"
+image = "img/author.jpg"
+headline = "a software engineer & educator"
+bio = "keep it simple, s!"
+links = [
+  { github = "https://github.com/oonid" },
+  { youtube = "https://youtube.com/oonid" },
+  { email = "mailto:oon@oo.or.id" },
+  { linkedin = "https://id.linkedin.com/in/oonid" }
+]

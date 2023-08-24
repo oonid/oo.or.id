@@ -1,0 +1,4 @@
+baseURL = "/"
+languageCode = "en"
+theme = "blowfish"
+outputs.home = ["HTML", "RSS", "JSON"]

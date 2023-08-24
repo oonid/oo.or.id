@@ -1,0 +1,16 @@
+[[main]]
+  name = "About"
+  pageRef = "about-o"
+  weight = 10
+
+[[main]]
+  pre = "fire"
+  name = "Blog"
+  pageRef = "contents"
+  weight = 20
+
+[[main]]
+  pre = "tag"
+  pageRef = "tags"
+  weight = 30
+
