@@ -2,3 +2,5 @@ baseURL = "/"
 languageCode = "en"
 theme = "blowfish"
 outputs.home = ["HTML", "RSS", "JSON"]
+# version 4
+googleAnalytics = "G-74TJBPL4HM"
