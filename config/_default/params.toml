@@ -1,4 +1,5 @@
 colorScheme = "blowfish"
 defaultAppearance = "dark"
 enableSearch = true
+article.showTaxonomies = true
 footer.showThemeAttribution = false
