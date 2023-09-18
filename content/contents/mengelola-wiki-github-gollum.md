@@ -4,7 +4,7 @@ date: 2021-02-02T23:45:00+08:00
 publishDate: 2021-02-02T23:45:00+08:00
 image: "/images/2021/wiki_github_gollum.png"
 url: "/content/mengelola-wiki-github-gollum"
-tags: ["Wiki", "GitHub", "Gollum", "Knowledge Base"]
+tags: ["Wiki", "GitHub", "Gollum", "Knowledge Base", "Ruby"]
 draft: false
 ---
 
@@ -46,6 +46,8 @@ $ docker run -v `pwd`:/wiki -p 4567:4567 gollumorg/gollum
 ```
 
 Berikutnya membuka web Gollum ini peramban (_browser_) `http://localhost:4567` lalu mengembangkan "dasar pengetahuan" yang akan aku tulis dalam format `markdown` (.md)!
+
+Tambahan catatan, Gollum ini dikembangkan dengan bahasa pemrograman Ruby. Membuatku tertarik melirik pemrograman Ruby. :raising_hands:
 
 
 [^1]: https://github.com/gollum
