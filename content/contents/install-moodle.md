@@ -11,68 +11,68 @@ draft: false
 
 {{< figure src="/images/2023/moodle-logo.webp" title="Install Moodle Learning Management System (LMS)" alt="Install Moodle Learning Management System (LMS)" position="center">}}
 
-It's been years not checking open source Moodle Learning Management System (LMS) project[^1], uh now it's really interesting project, at the moment it is Moodle 4, the long-term-support (LTS) version 4.1.
+It's been years since I last checked out the open-source Moodle Learning Management System (LMS) project[^1], and now it's becoming a really interesting project. Currently, it's at Moodle 4, the long-term-support (LTS) version 4.1.
 
-As I restarting my career and working in EdTech, also I am working on my certification's course, Spring 2023-EPOL 483-Learning Technologies.
+As I'm restarting my career and delving into EdTech, I'm also working on my certification course, Spring 2023-EPOL 483-Learning Technologies.
 
 {{< article link="/content/re-starting-career-educator-dicoding/" >}}
 
-So let's play a bit with Moodle :joy:
+So let's dive into Moodle a bit :joy:
 
-Okay, first step, installation.. 
-Compared to documentation of Django, the documentation on Moodle pretty much minimalist :cry:
+Okay, first step, installation... Compared to the documentation for Django, the Moodle documentation is quite minimalistic :cry:
 
-I try to install in debian (on KVM, debian has minimalist iso: netinst), but the (community) installation documentation for debian is really sad[^2], so I refer to installation documentation for ubuntu[^3][^4]. 
-I prefer to use nginx instead of Apache also PostgreSQL instead of MySQL, but the only documentation regarding Nginx is very short[^5] and PostgreSQL is too[^6], so I will explore about the conversion myself.
+I attempted to install it on Debian (on KVM, Debian has a minimalist iso: netinst), but the community installation documentation for Debian is lacking[^2], so I referred to the installation documentation for Ubuntu[^3][^4]. I prefer to use nginx instead of Apache and PostgreSQL instead of MySQL, but the documentation for both Nginx[^5] and PostgreSQL[^6] is too concise, so I had to figure out the configuration myself.
+
 
 ## PHP
 
-I am using requirements from [^7],
-the guidance for PHP version refer to [^8]. Plus, Moodle requires the xml and mbstring PHP extension.
+I'm using the requirements from [^7], and the guidance for the PHP version is referred to in [^8]. Additionally, Moodle requires the several PHP extensions.
 
 ```
 $ sudo apt install nginx php-fpm php-xml php-mbstring php-curl php-zip php-gd php-intl
 ```
-(or probably you need to define the package specifically `php8.1-fpm`, `php8.1-xml`, `php8.1-mbstring`, `php8.1-curl`, `php8.1-gd`, `php8.1-zip`, and `php8.1-intl`)
+(or you may need to specify the package specifically as `php8.1-fpm`, `php8.1-xml`, `php8.1-mbstring`, `php8.1-curl`, `php8.1-gd`, `php8.1-zip`, and `php8.1-intl`)
 
-To check the modules as required in [^7] the recommendation are sodium and exif:
+To check the modules as required in [^7], the recommendations are sodium and exif:
 
 ```
 $ php8.1 -m
 ```
 
-To comply the PHP setting `max_input_vars` in requirements [^7], edit `php.ini` file, in my environment I found it in `/etc/php/8.1/fpm/php.ini`.
+To comply with the PHP setting `max_input_vars` in the requirements [^7], edit the `php.ini` file. In my environment, I found it at `/etc/php/8.1/fpm/php.ini`.
 
 ```
-# file /etc/php/8.1/fpm/php.ini
+# in file /etc/php/8.1/fpm/php.ini
 
 ; How many GET/POST/COOKIE input variables may be accepted
 ;max_input_vars = 1000
 max_input_vars = 5000
 ```
 
+
 ## Nginx
 
-After installed PHP, let's try to display the `phpinfo()` via web server, which I choose `nginx` (over apache).
+After installing PHP, let's try to display the `phpinfo()` via the web server, which I chose as `nginx` over Apache.
 
-Install nginx web server. btw it pronounce "engine x".
+Install the nginx web server. By the way, it's pronounced "engine x".
+
 ```
 $ sudo apt install nginx
 ```
 
-Check if the nginx is running and listen on (TCP) port 80 or called port http, using command `ss` or socket statistic.
+Check if nginx is running and listening on (TCP) port 80, also known as port http, using the command `ss` or socket statistics.
 
 ```
 $ ss --listen --tcp
 ```
 
-or if you want to be more specific on source (src) port http:
+or, if you want to be more specific about the source (src) port http:
 
 ```
 $ ss --listen --tcp src :http
 ```
 
-to make sure the process that listen on http port is nginx (not other web server such as apache), you need to use superuser `sudo`:
+To ensure that the process listening on the http port is nginx (and not another web server such as Apache), you need to use the superuser `sudo`.
 
 ```
 $ sudo ss --listen --tcp --process src :http
@@ -81,7 +81,7 @@ LISTEN             0                  511                                  0.0.0
 LISTEN             0                  511                                     [::]:http                                 [::]:*                users:(("nginx",pid=624,fd=6),("nginx",pid=623,fd=6),("nginx",pid=620,fd=6))            
 ```
 
-You can check by open browser and access the IP Address `http://192.168.122.123`
+You can also check by opening a browser and accessing the IP Address `http://192.168.122.123`
 
 ```
 $ curl http://192.168.122.123
@@ -92,28 +92,29 @@ $ curl http://192.168.122.123
 ...
 ```
 
-If you caught `HTTP Error 500`, check the default `error.log`. I found at Ubuntu, the error log directly output there, but not in Debian (still need to reconfigure).
-
+If you encounter `HTTP Error 500`, check the default `error.log`. In Ubuntu, the error log is directly output there, but not in Debian (you still need to reconfigure).
 ```
 $ sudo tail /var/log/nginx/error.log
 ```
 
-Let's find out the main directory of the nginx, we call it `root` directory or `www root`.
+Let's find out the main directory of nginx, also known as the `root` directory or `www root`.
+
 ```
 $ grep root /etc/nginx/sites-enabled/default
 root /var/www/html;
 ```
 
-Create `phpinfo.php` file in www root.
+Create a `phpinfo.php` file in www root.
 ```
 echo "<?php phpinfo(); ?>" | sudo tee /var/www/html/phpinfo.php
 ```
 
-We can not access directly to `http://192.168.122.123/phpinfo.php` as it will output plain text the contents of phpinfo.php, so we need php-fpm.
+We cannot directly access `http://192.168.122.123/phpinfo.php` as it will output the plain text contents of phpinfo.php, so we need php-fpm.
+
 
 ## php-fpm
 
-We have installed `php-fpm`, but as we can see, there's no socket listen with process name php-fpm. So our guess is php-fpm listen as sock file.
+We have installed `php-fpm`, but as we can see, there's no socket listening with the process name php-fpm. So our guess is that php-fpm listens as a sock file.
 
 ```
 $ grep listen /etc/php/8.1/fpm/pool.d/www.conf | grep -v "^;"
@@ -122,7 +123,8 @@ listen.owner = www-data
 listen.group = www-data
 ```
 
-Find out more detail regarding socket file `/run/php/php8.1-fpm.sock`:
+Find out more details regarding the socket file `/run/php/php8.1-fpm.sock`:
+
 ```
 $ sudo lsof +c0 -Ua /run/php/php8.1-fpm.sock 
 COMMAND      PID     USER   FD   TYPE             DEVICE SIZE/OFF  NODE NAME
@@ -130,7 +132,7 @@ php-fpm8.1 10099     root    8u  unix 0x027a7860e      0t0 26227 /run/php/php8.1
 php-fpm8.1 10100 www-data   10u  unix 0x027a7860e      0t0 26227 /run/php/php8.1-fpm.sock type=STREAM (LISTEN)
 ```
 
-Move forward, configure the `php-fpm` with `nginx`, to simplify this writing, we will use the `default` setting of nginx (site without domain, just IP Address). Adjust configuration in `/etc/nginx/sites-enabled/default`, from:
+Move forward, configure the `php-fpm` with `nginx`. To simplify this writing, we will use the `default` setting of nginx (a site without a domain, just an IP Address). Adjust the configuration in `/etc/nginx/sites-enabled/default`, from:
 ```
     # pass PHP scripts to FastCGI server
     #
@@ -154,13 +156,15 @@ to this configuration (make sure to change `unix:/run/php/php8.1-fpm.sock`):
     }
 ```
 
-Test `nginx` configuration, if it is okay, then restart nginx:
+Test the `nginx` configuration, and if it is okay, restart nginx:
+
 ```
 $ sudo nginx -t
 $ sudo systemctl restart nginx
 ```
 
 Check the phpinfo again:
+
 ```
 $ curl http://192.168.122.123/phpinfo.php
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
@@ -169,7 +173,8 @@ $ curl http://192.168.122.123/phpinfo.php
 ...
 ```
 
-If install new PHP extension or reconfigure, restart the PHP-FPM:
+If we install a new PHP extension or reconfigure, restart the PHP-FPM:
+
 ```
 $ sudo apt install php8.1-soap
 $ sudo systemctl restart php8.1-fpm
@@ -177,21 +182,24 @@ $ sudo systemctl restart php8.1-fpm
 
 Our web server is ready to serve PHP files.
 
+
 ## PostgreSQL
 
-Next, the database, as mentioned in requirements [^7], I use PostgreSQL 12.
+Next, the database. As mentioned in the requirements [^7], I use PostgreSQL 12.
 
 ```
 $ sudo apt install postgresql-12
 ```
-(sometimes you need to provide package `locales-all` before install PostgreSQL)
+(Sometimes you need to provide the package `locales-all` before installing PostgreSQL)
 
-Next, check the service is listen on port 5432 or called port postgresql:
+Next, check if the service is listening on port 5432, also known as port postgresql:
+
 ```
 $ sudo ss --listen --tcp --process
 ```
 
-or you can easily connect to the database server via postgresql client cli `psql` with user `postgres` (to database `postgres`), and then check connection info with command `\conninfo`.
+or you can easily connect to the database server via the postgresql client cli `psql` with the user `postgres` (to the database `postgres`), and then check the connection info with the command `\conninfo`.
+
 ```
 $ sudo su - postgres -c psql
 psql (12.18 (Debian 12.18-1.pgdg120+2))
@@ -201,7 +209,8 @@ postgres=# \conninfo
 You are connected to database "postgres" as user "postgres" via socket in "/var/run/postgresql" at port "5432".
 ```
 
-To connect PHP to PostgreSQL, install extension `php8.1-pgsql` and restart `php8.1-fpm`:
+To connect PHP to PostgreSQL, install the extension `php8.1-pgsql` and restart `php8.1-fpm`:
+
 ```
 $ sudo apt install php8.1-pgsql
 $ sudo systemctl restart php8.1-fpm
@@ -209,13 +218,13 @@ $ sudo systemctl restart php8.1-fpm
 
 ## Moodle
 
-It's time for the main menu, installing moodle, using git.
+It's time for the main course: installing Moodle using git.
 
 ```
 $ git clone git://git.moodle.org/moodle.git
 ```
 
-it received tens of thousands files with hundreds MB :joy:
+It received tens of thousands of files with hundreds of MB :joy:
 
 ```
 $ cd moodle
@@ -237,7 +246,8 @@ $ git branch
   main
 ```
 
-Continue with setup moodle at www root:
+Continue with setting up Moodle at the www root:
+
 ```
 $ sudo cp -R /home/o/moodle /var/www/html/
 $ sudo chmod -R 0755 /var/www/html/moodle
@@ -246,32 +256,36 @@ $ sudo chown -R www-data /var/www/moodledata
 $ sudo chmod -R 0777 /var/www/moodledata
 ```
 
-There are references that use `/usr/local/moodledata` as the alternative of `/var/moodledata` to store user uploads, session data and other things that only moodle can access to and not accessible from the web. And the alternative for cache store in `/var/cache/moodle`.
+There are references that use `/usr/local/moodledata` as an alternative to `/var/www/moodledata` to store user uploads, session data, and other things that only Moodle can access and are not accessible from the web. The alternative for the cache store is in `/var/cache/moodle`.
 
-Additionally if you got `HTTP 403 Forbidden` while accessing `http://192.168.122.123/moodle/` and the error log at `/var/log/nginx/error.log` inform that it because of `directory index of "/var/www/html/moodle/" is forbidden`, means change your access to `http://192.168.122.123/moodle/index.php` or adjust index configuration in `/etc/nginx/sites-enabled/default` by adding `index.php`:
+Additionally, if you encounter `HTTP 403 Forbidden` while accessing `http://192.168.122.123/moodle/` and the error log at `/var/log/nginx/error.log` indicates that it's because directory index of "/var/www/html/moodle/" is forbidden, you need to change your access to `http://192.168.122.123/moodle/index.php` or adjust the index configuration in `/etc/nginx/sites-enabled/default` by adding `index.php`:
+
 ```
     # Add index.php to the list if you are using PHP
     index index.php index.html index.htm index.nginx-debian.html;
 ```
 
-Or, if everything is okay, you should see the moodle installation page while accessing `http://192.168.122.123/moodle/`.
+Or, if everything is okay, you should see the Moodle installation page when accessing `http://192.168.122.123/moodle/`.
 
 {{< figure src="/images/2023/moodle-install-page.webp" title="Moodle Installation Page" alt="Moodle Installation Page" position="center">}}
 
-From the installation page, after pressing Next, you will see form with 3 inputs:
+From the installation page, after clicking Next, you will see a form with 3 inputs:
+
 ```
 Web address: http://192.168.122.123/moodle
 Moodle directory: /var/www/html/moodle
 Data directory: /var/www/moodledata
 ```
-(you can adjust data directory with what you want as created above, eg.: /var/moodledata)
+(you can adjust the data directory to whatever you want, as created above, e.g., `/var/moodledata`)
 
-After pressing another Next, you choose database driver:
+After clicking Next again, you choose the database driver:
+
 ```
 Type: PostgreSQL (native/pgsql)
 ```
 
-Next, database settings:
+Next, the database settings:
+
 ```
 Database host: localhost
 Database name: moodle
@@ -281,14 +295,16 @@ Tables prefix: mdl_
 Database port: 5432
 Unix socket: 
 ```
-(you can get the database port and unix socket from `\conninfo` above, you can  try to exclude the Unix socket if you still can not connect).
+(you can get the database port and unix socket from `\conninfo` above; you can try to exclude the Unix socket if you still cannot connect).
 
-The connection should be failed because you don't have PostgreSQL user `moodle` and database `moodle`, then it's time to set up database for moodle.
+The connection should fail because you don't have the PostgreSQL user `moodle` and the database `moodle`. Then it's time to set up the database for Moodle.
+
 ```
 $ sudo su - postgres -c psql
 ```
 
-using PostgreSQL console:
+Using the PostgreSQL console:
+
 ```
 postgres=# CREATE USER moodle WITH PASSWORD 'insecure~pasSw0rd';
 CREATE ROLE
@@ -299,7 +315,8 @@ GRANT
 postgres=# \q
 ```
 
-And, after another Next, the result of configuration:
+And after another Next, the result of the configuration:
+
 ```
 <?php  // Moodle configuration file
 
@@ -332,7 +349,8 @@ require_once(__DIR__ . '/lib/setup.php');
 // it is intentional because it prevents trailing whitespace problems!
 ```
 
-Create the `config.php` at `/var/www/html/moodle/config.php`, set the user and group (owner) of the file to the same with PHP-FPM above, also set the permission so `others can do anything`:
+Create the `config.php` at `/var/www/html/moodle/config.php`, set the user and group (owner) of the file to be the same as PHP-FPM above, and also set the permission so `others can not do anything`:
+
 ```
 $ sudo vim /var/www/html/moodle/config.php
 $ sudo chown www-data:www-data /var/www/html/moodle/config.php
@@ -341,25 +359,27 @@ $ ls -al /var/www/html/moodle/config.php
 -rw-r----- 1 www-data www-data 699 Mar 23 04:55 /var/www/html/moodle/config.php
 ```
 
-Afterward, confirm the conditions. (copyright, license, etc),
-and then we'll redirected to Moodle admin page to check the minimum configuration settings:
+Afterward, confirm the conditions (copyright, license, etc),
+and then we'll be redirected to the Moodle admin page to check the minimum configuration settings:
+
 ```
 http://192.168.122.123/moodle/admin
 ```
 
-If all the minimum configuration passed, the Moodle installation processing is starting, showing Moodle's installed modules. At the end of the installation, page `editadvanced.php` will configure the main administrator (admin) account for password and email address.
+If all the minimum configuration passes, the Moodle installation processing starts, showing Moodle's installed modules. At the end of the installation, the page `editadvanced.php` will configure the main administrator (admin) account for the password and email address.
 
-Next redirected to Dashboard: `http://192.168.122.123/moodle/my`.
+Next, we'll be redirected to the Dashboard: `http://192.168.122.123/moodle/my`.
 
-If you see many unloaded files (image, JS, CSS, etc) in the browser, check the default `access.log` for HTTP 404.
+If you see many unloaded files (images, JS, CSS, etc.) in the browser, check the default `access.log` for `HTTP 404`.
 
 ```
 $ sudo tail -f /var/log/nginx/access.log | grep 404
 ```
 
-One the tricks is change the `slasharguments` at configuration, add `$CFG->slasharguments = false;` before `require_once(__DIR__ . '/lib/setup.php');` in `/var/www/html/moodle/config.php` [^10][^11]. We'll do this temporary, as the SCORM packages required the `slasharguments`, until we reconfigure the Nginx to support the `slasharguments`.
+One of the tricks is to change the `slasharguments` in the configuration; add `$CFG->slasharguments = false;` before `require_once(__DIR__ . '/lib/setup.php');` in `/var/www/html/moodle/config.php` [^10][^11]. We'll do this temporarily, as the **SCORM** packages require the `slasharguments`, until we reconfigure Nginx to support the `slasharguments`.
 
 Reconfigure Nginx to support `slasharguments`, change from:
+
 ```
         location ~ \.php$ {
                 include snippets/fastcgi-php.conf;
@@ -369,7 +389,8 @@ Reconfigure Nginx to support `slasharguments`, change from:
         }
 ```
 
-To configuration below (and do not forget to `sudo systemctl restart nginx`):
+To the configuration below (and don't forget to `sudo systemctl restart nginx`):
+
 ```
         location ~ [^/]\.php(/|$) {
                 fastcgi_split_path_info  ^(.+\.php)(/.+)$;
@@ -381,15 +402,16 @@ To configuration below (and do not forget to `sudo systemctl restart nginx`):
         }
 ```
 
-DONE (for now)! "simple" Moodle installation.
+DONE (for now)! A "simple" Moodle installation.
 
 Yes, it's quite fun to explore Moodle (and PHP) again.. :speak_no_evil:
 
 PS.
 
-note regarding KVM, the DHCP service for guest operating system needs package `dnsmasq` installed on host.
+Note regarding KVM, the DHCP service for the guest operating system needs the package `dnsmasq` installed on the host.
 
-note regarding debconf, if you got warning regarding `debconf: unable to initialize frontend: Dialog`, you can switch the setting into `debconf/frontend: Noninteractive` [^9].
+Note regarding debconf, if you encounter a warning regarding `debconf: unable to initialize frontend: Dialog`, you can switch the setting to `debconf/frontend: Noninteractive` [^9].
+
 ```
 $ sudo debconf-show debconf
   debconf/priority: high
@@ -408,9 +430,9 @@ $ sudo debconf-show debconf
   debconf-apt-progress/preparing:
 ```
 
-note regarding https, we'll cover in another article to setup HTTPs on the website which use nginx and certbot of Let's Encrypt Certificate Authority (CA).
+Note regarding https, we'll cover it in another article to set up HTTPS on the website which uses nginx and certbot from the Let's Encrypt Certificate Authority (CA).
 
-note regarding supportemail, install postfix on the server `sudo apt install postfix` and set required support email to for example support@dom.ain.
+Note regarding supportemail, install postfix on the server sudo apt install postfix and set the required support email to, for example, support@dom.ain.
 
 [^1]: https://moodledev.io/general/releases/4.1/4.1.2
 [^2]: https://docs.moodle.org/403/en/Installing_Moodle_on_Debian_based_distributions
