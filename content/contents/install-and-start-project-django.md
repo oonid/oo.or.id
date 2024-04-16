@@ -4,7 +4,7 @@ date: 2015-04-02T01:16:06+07:00
 publishDate: 2015-04-02T01:16:06+07:00
 image: "/images/2017/django-logo-positive.png"
 url: "/content/install-and-start-project-django"
-tags: ["Django", "Python"]
+tags: ["Django", "Python", "PostgreSQL"]
 draft: false
 ---
 
