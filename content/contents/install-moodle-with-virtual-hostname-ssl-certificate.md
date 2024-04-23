@@ -1,7 +1,7 @@
 ---
 title: "Install Moodle with Virtual Hostname and SSL Certificate"
-date: 2023-03-23 18:00:00-08:00
-publishDate: 2023-03-23 18:00:00-08:00
+date: 2023-03-27 23:00:00+07:00
+publishDate: 2023-03-27 23:00:00+07:00
 image: "/images/2023/moodle-logo.webp"
 url: "/content/install-moodle-with-virtual-hostname-ssl-certificate"
 tags: ["Linux", "Moodle"]
