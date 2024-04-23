@@ -435,10 +435,6 @@ Note regarding https, we'll cover it in another article to set up HTTPS on the w
 
 Note regarding supportemail, install postfix on the server sudo apt install postfix and set the required support email to, for example, support@dom.ain.
 
-Complete your Moodle installation with domain name and SSL certificate with this reference article.
-
-{{< article link="/content/complete-moodle-installation-using-virtual-hostname-ssl-certificate/" >}}
-
 :cloud:
 
 [^1]: https://moodledev.io/general/releases/4.1/4.1.2
