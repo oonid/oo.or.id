@@ -3,7 +3,7 @@ title: "Install and Update Drupal Core with Git"
 date: 2012-12-21 06:36:15+07:00
 publishDate: 2012-12-21 06:36:15+07:00
 url: "/content/install-and-update-drupal-core-git"
-tags: ["commit", "Drupal", "git", "install", "update", "merge"]
+tags: ["Drupal", "git", "PHP"]
 draft: false
 ---
 
@@ -60,4 +60,4 @@ ada beberapa hal pertimbangan:
 	<li>proses update database apakah perlu dilakukan terpisah</li>
 </ul>
 
-[ref:1] http://cweagans.net/blog/2011/10/14/my-drupalgit-workflow
+[^1]: http://cweagans.net/blog/2011/10/14/my-drupalgit-workflow

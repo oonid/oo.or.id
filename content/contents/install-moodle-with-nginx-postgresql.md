@@ -1,10 +1,11 @@
 ---
-title: "Install Moodle"
+title: "Install Moodle with Nginx and PostgreSQL"
 date: 2023-03-23 18:00:00-08:00
 publishDate: 2023-03-23 18:00:00-08:00
 image: "/images/2023/moodle-logo.webp"
-url: "/content/install-moodle"
-tags: ["Linux", "Moodle"]
+url: "/content/install-moodle-with-nginx-postgresql"
+aliases: ["/content/install-moodle"]
+tags: ["Linux", "Moodle", "PostgreSQL", "PHP"]
 draft: false
 
 ---
