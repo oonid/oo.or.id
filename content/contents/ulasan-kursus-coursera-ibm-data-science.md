@@ -4,7 +4,7 @@ date: 2021-02-09T01:10:00+08:00
 publishDate: 2021-03-14T08:09:10+08:00
 image: "/images/2021/coursera_ibm_data_science_certificates.png"
 url: "/content/ulasan-kursus-coursera-ibm-data-science"
-tags: ["python", "Coursera", "IBM", "Data Science"]
+tags: ["python", "Coursera", "IBM", "Data Science", "course"]
 draft: false
 ---
 

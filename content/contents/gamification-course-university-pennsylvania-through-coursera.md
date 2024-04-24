@@ -4,7 +4,7 @@ date: 2014-04-15 12:47:44+07:00
 publishDate: 2014-04-15 12:47:44+07:00
 image: "/images/2014/coursera-gamification-2014.jpg"
 url: "/content/gamification-course-university-pennsylvania-through-coursera"
-tags: ["Coursera", "Gamification"]
+tags: ["Coursera", "Gamification", "course"]
 draft: false
 ---
 

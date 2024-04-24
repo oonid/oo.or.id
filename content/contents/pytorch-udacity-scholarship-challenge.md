@@ -4,7 +4,7 @@ date: 2018-10-30T23:46:00+08:00
 publishDate: 2018-10-30T23:46:00+08:00
 image: "/images/2018/pytorchudacityscholar.png"
 url: "/content/pytorch-udacity-scholarship-challenge"
-tags: ["Udacity", "PyTorch", "Machine Learning"]
+tags: ["Udacity", "PyTorch", "Machine Learning", "course"]
 draft: false
 ---
 

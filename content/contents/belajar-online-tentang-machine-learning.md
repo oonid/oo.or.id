@@ -4,7 +4,7 @@ date: 2014-09-06 13:52:25+07:00
 publishDate: 2014-09-06 13:52:25+07:00
 image: "/images/2014/belinda-fewings-_CyyAj0QboY-unsplash.jpg"
 url: "/content/belajar-online-tentang-machine-learning"
-tags: ["Coursera", "Machine Learning"]
+tags: ["Coursera", "Machine Learning", "course"]
 draft: false
 ---
 

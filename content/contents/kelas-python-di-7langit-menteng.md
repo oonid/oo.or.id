@@ -3,7 +3,7 @@ title: "Kelas Python di 7Langit (Menteng)"
 date: 2014-08-08T13:43:04+07:00
 image: "/images/2014/python-logo-master-v3-tm-flattened.png"
 url: "/content/kelas-python-di-7langit-menteng"
-tags: ["course", "training", "Python", "Indonesia", "kelas teknologi"]
+tags: ["training", "Python", "Indonesia", "kelas teknologi"]
 draft: false
 ---
 

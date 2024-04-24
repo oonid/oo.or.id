@@ -4,7 +4,7 @@ date: 2021-03-07T21:22:23+08:00
 publishDate: 2021-03-07T21:22:23+08:00
 image: "/images/2021/1024px-NYC_Health_%2B_Hospitals_logo.svg.png"
 url: "/content/the-battle-of-neighbourhoods"
-tags: ["Coursera", "IBM", "Data Science"]
+tags: ["Coursera", "IBM", "Data Science", "course"]
 draft: false
 ---
 

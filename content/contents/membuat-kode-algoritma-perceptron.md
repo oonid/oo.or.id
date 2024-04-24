@@ -4,7 +4,7 @@ date: 2018-12-02T23:46:00+08:00
 publishDate: 2018-12-02T23:46:00+08:00
 image: "/images/2018/pytorchudacityscholar.png"
 url: "/content/membuat-kode-algoritma-perceptron"
-tags: ["Udacity", "Machine Learning"]
+tags: ["Udacity", "Machine Learning", "course"]
 draft: false
 ---
 

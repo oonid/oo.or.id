@@ -4,7 +4,7 @@ date: 2018-12-21T23:47:00+08:00
 publishDate: 2018-12-21T23:47:00+08:00
 image: "/images/2018/pytorchudacityscholar.png"
 url: "/content/pengenalan-pytorch-untuk-deep-learning"
-tags: ["Udacity", "Machine Learning", "PyTorch"]
+tags: ["Udacity", "Machine Learning", "PyTorch", "course"]
 draft: false
 ---
 
