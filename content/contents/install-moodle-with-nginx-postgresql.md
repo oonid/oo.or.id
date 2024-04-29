@@ -433,7 +433,7 @@ $ sudo debconf-show debconf
 
 Note regarding https, we'll cover it in another article to set up HTTPS on the website which uses nginx and certbot from the Let's Encrypt Certificate Authority (CA).
 
-Note regarding supportemail, install postfix on the server sudo apt install postfix and set the required support email to, for example, support@dom.ain.
+Note regarding supportemail, install postfix on the server `sudo apt install postfix` and set the required support email to, for example, support@dom.ain.
 
 :cloud:
 
