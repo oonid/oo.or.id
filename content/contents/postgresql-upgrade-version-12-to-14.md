@@ -39,7 +39,7 @@ $ sudo -u postgres /usr/lib/postgresql/14/bin/pg_upgrade \
 --new-options '-c config_file=/etc/postgresql/14/main/postgresql.conf'
 ```
 
-After completing the upgrade, I switched the ports and restarted the server.
+After completing the upgrade, I switched the ports, restarted the server, and check the version.
 
 ```
 # comment: Switch to port 5432
@@ -47,6 +47,9 @@ $ sudo vim /etc/postgresql/14/main/postgresql.conf
 
 # comment: Switch to port 5433
 $ sudo vim /etc/postgresql/12/main/postgresql.conf
+
+$ sudo systemctl start postgresql.service
+$ sudo -u postgres psql -c "SELECT version();"
 ```
 
 By the way, I came across a similar guideline to my process [^5], which is more advanced and involves additional steps using `analyze_new_cluster.sh` and `delete_old_cluster.sh`.
