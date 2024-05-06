@@ -4,7 +4,7 @@ date: 2020-09-25T23:45:00+08:00
 publishDate: 2020-09-25T23:45:00+08:00
 image: "/images/2017/django-logo-positive.png"
 url: "/content/belajar-django-rest-framework-membuat-web-backend"
-tags: ["Django", "Python", "kelas teknologi"]
+tags: ["Django", "Django REST Framework", "Python", "kelas teknologi"]
 draft: false
 ---
 
