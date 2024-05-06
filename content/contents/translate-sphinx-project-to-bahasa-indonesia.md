@@ -3,7 +3,7 @@ title: "Translate Sphinx Doc to Bahasa Indonesia"
 date: 2019-10-22 23:37:15+08:00
 image: "/images/2014/python-powered-h-140x182.png"
 url: "/content/translate-sphinx-doc-to-bahasa-indonesia"
-tags: ["Python", "Bahasa Indonesia", "Documentation", "Sphinx", "Open Source"]
+tags: ["Python", "Bahasa Indonesia", "Documentation", "translation", "localization", "Open Source"]
 draft: false
 ---
 

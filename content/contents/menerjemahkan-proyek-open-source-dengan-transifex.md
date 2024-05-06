@@ -4,7 +4,7 @@ date: 2019-10-28T12:34:45+08:00
 publishDate: 2019-10-28T12:34:45+08:00
 image: "/images/2019/transifex.png"
 url: "/content/menerjemahkan-proyek-open-source-dengan-transifex"
-tags: ["youtube", "Open Source", "Python", "Bahasa Indonesia", "video editing", "kelas teknologi"]
+tags: ["youtube", "Open Source", "Python", "Bahasa Indonesia", "translation", "localization", "video editing", "kelas teknologi"]
 draft: false
 ---
 

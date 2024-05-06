@@ -4,7 +4,7 @@ date: 2019-11-23T12:45:00+07:00
 publishDate: 2019-11-23T20:21:22+07:00
 image: "/images/2019/pyconid_2019_speaker.webp"
 url: "/content/pycon-indonesia-2019"
-tags: ["PyCon", "Indonesia", "Python", "Open Source", "Pelican"]
+tags: ["PyCon", "Indonesia", "Python", "Bahasa Indonesia", "translation", "localization", "Open Source", "Pelican"]
 draft: false
 ---
 

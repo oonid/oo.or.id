@@ -3,7 +3,7 @@ title: "What I built with Python 15 years ago"
 date: 2018-10-31T12:34:45+08:00
 image: "/images/2014/python-logo-master-v3-tm-flattened.png"
 url: "/content/what-i-built-with-python-15-years-ago"
-tags: ["Python", "Indonesia", "kelas teknologi", "Open Source"]
+tags: ["Python", "Indonesia", "translation", "localization", "Open Source"]
 draft: false
 ---
 

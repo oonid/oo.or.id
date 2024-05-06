@@ -4,7 +4,7 @@ date: 2013-04-08 16:23:05+07:00
 publishDate: 2013-04-08 16:23:05+07:00
 image: ""
 url: "/content/beberapa-terjemahan-kata-dalam-bidang-komputer-bahasa-indonesia"
-tags: ["Bahasa Indonesia"]
+tags: ["Bahasa Indonesia", "translation", "localization"]
 draft: false
 ---
 
