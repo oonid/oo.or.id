@@ -1,5 +1,5 @@
 ---
-title: ""Translating PgAdmin 4 into Bahasa Indonesia""
+title: "Translating PgAdmin 4 into Bahasa Indonesia"
 date: 2023-04-26 20:07:57+07:00
 publishDate: 2023-04-26 20:07:57+07:00
 image: "/images/2023/PostgreSQL_logo.1color_blue.png"
