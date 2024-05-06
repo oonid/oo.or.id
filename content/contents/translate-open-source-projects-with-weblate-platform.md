@@ -10,7 +10,7 @@ draft: false
 
 {{< figure src="/images/2019/Weblate_logo.png" title="Weblate Logo" >}}
 
-Exploring various tools for open-source project translation (localization into Bahasa Indonesia), I've found Weblate to be particularly intriguing. Weblate, built with Django and currently at version 3.8, caught my attention due to my interest in Django [^1].
+Exploring various tools for open-source project translation (localization into Bahasa Indonesia), I've found Weblate to be particularly intriguing. Weblate [^2], built with Django and currently at version 3.8, caught my attention due to my interest in Django [^1].
 
 I decided to test Weblate by using its hosting service to translate PyPI, the Python Package Index. The video below showcases the process of translating PyPI into Bahasa Indonesia. Additionally, the video provides a preview of the PyPI team's request for translation. Let's come together and contribute to the community!
 
