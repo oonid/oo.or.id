@@ -10,9 +10,6 @@ draft: false
 
 {{< figure src="/images/2022/Rust_for_Linux_logo.webp" title="Rust for Linux Logo" >}}
 
-I think this is really the year to start learning Rust :crab:
-This is the seventh year for Rust as the most loved language with 87% of developers saying they want to continue using it.[^1]
-
 I think this is really the year to start learning Rust :crab:.
 Rust has been named the most loved language for the seventh year in a row, with 87% of developers expressing a desire to continue using it[^1].
 
